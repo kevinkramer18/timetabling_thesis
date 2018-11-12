@@ -1,6 +1,6 @@
 class Course:
 
-        def _init_(self, course_id, college_id, dept_id, course_code, units, course_type):
+        def __init__(self, course_id, college_id, dept_id, course_code, units, course_type):
             self.course_id = course_id
             self.college_id = college_id
             self.dept_id = dept_id

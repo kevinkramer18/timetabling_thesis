@@ -3,32 +3,17 @@ from room import Room
 from course import Course
 from offering import Offering
 
+# Loading lists of rooms, courses, f
+from loading import load_course_list
+from loading import load_room_list
 
-#!/usr/bin/python3
+course_list = list(load_course_list())
+room_list = list(load_room_list())
 
-import pymysql
+for item in course_list:
+    print(item.course_id, item.college_id, item.dept_id, item.course_code, item.units, item.course_type)
 
-# Open database connection
-db = pymysql.connect("localhost","root","root","mysql" )
+for item2 in room_list:
+    print(item2.room_id, item2.room_code, item2.room_type, item2.room_capacity)
 
-# prepare a cursor object using cursor() method
-cursor = db.cursor()
-
-# Prepare SQL query to INSERT a record into the database.
-sql = "SELECT * FROM timetabling.course"
-try:
-   # Execute the SQL command
-   cursor.execute(sql)
-   # Fetch all the rows in a list of lists.
-   results = cursor.fetchall()
-   for row in results:
-      fname = row[4]
-
-      # Now print fetched result
-      print ("fname = %s" % \
-         (fname ))
-except:
-   print ("Error: unable to fetch data")
-
-# disconnect from server
-db.close()
+#load_course_list()

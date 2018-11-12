@@ -1,6 +1,6 @@
 class Offering:
 
-    def _init_(self, course, faculty, room, start_time, end_time):
+    def __init__(self, course, faculty, room, start_time, end_time):
         self.course = course
         self.faculty = faculty
         self.room = room
