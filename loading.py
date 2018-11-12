@@ -20,7 +20,7 @@ def load_course_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT c1.course_id, c1.college_id, c1.dept_id, c1.course_code, c1.units, c1.course_type FROM timetabling.course c1 INNER JOIN timetabling.offering o1 ON c1.course_id = o1.course_id WHERE  o1.start_year =2013 AND o1.term=1 AND c1.course_id != 1686"
+    sql = "SELECT c1.course_id, c1.college_id, c1.dept_id, c1.course_code, c1.units, c1.course_type FROM timetabling.course c1 INNER JOIN timetabling.offering o1 ON c1.course_id = o1.course_id WHERE  o1.start_year =2013 AND o1.term=1 AND c1.course_id != 1686 AND c1.college_id =2"
     try:
         # Execute the SQL command
         cursor.execute(sql)
