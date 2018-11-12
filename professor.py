@@ -1,10 +1,10 @@
 class Professor:
 
-    def __init__(self, faculty_id, last_name, first_name, load, preferred_courses, preferred_timeslots):
-        self.faculty_id = faculty_id
-        self.last_name = last_name
+    def __init__(self, user_id, first_name, last_name,  load):
+        self.user_id = user_id
         self.first_name = first_name
-        self.units = 0
+        self.last_name = last_name
         self.load = load
-        self.preferred_courses = list(preferred_courses)
+        self.units = 0
+        self.preferred_courses = []
 

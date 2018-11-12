@@ -81,19 +81,19 @@ def load_faculty_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = ""
+    sql = "SELECT users.user_id, users.first_name, users.last_name,  loads.teaching_load  FROM timetabling.users INNER JOIN timetabling.faculty ON faculty.user_id = users.user_id INNER JOIN timetabling.loads  ON loads.faculty_id = faculty.faculty_id WHERE loads.term = 1 AND loads.start_year = 2013 "
     try:
         # Execute the SQL command
         cursor.execute(sql)
         # Fetch all the rows in a list of lists.
         results = cursor.fetchall()
         for row in results:
-            room_id_value = row[0]
-            room_code_value = row[1]
-            room_type_value = row[3]
-            room_capacity_value = row[4]
+            professor_id_value = row[0]
+            professor_fname_value = row[1]
+            professor_lname_value = row[2]
+            professor_load_value = row[3]
 
-            professor = Professor()
+            professor = Professor(professor_id_value,professor_fname_value, professor_lname_value, professor_load_value)
             faculty_list.append(professor)
     except:
         print("Error: unable to fetch data")
