@@ -11,7 +11,7 @@ import pymysql
 course_list = []
 faculty_list = []
 room_list = []
-
+offering_list = []
 
 def load_course_list():
     # Open database connection
@@ -102,3 +102,31 @@ def load_faculty_list():
     db.close()
     return faculty_list
 
+
+def load_offering_list():
+    # Open database connection
+    db = pymysql.connect("localhost", "root", "root", "mysql")
+    # prepare a cursor object using cursor() method
+    cursor = db.cursor()
+
+    # Prepare SQL query to INSERT a record into the database.
+    sql = "SELECT offering.offering_id, offering.course_id, offering.section FROM timetabling.offering where term = 1 and start_year = 2013;"
+    try:
+        # Execute the SQL command
+        cursor.execute(sql)
+        # Fetch all the rows in a list of lists.
+        results = cursor.fetchall()
+        for row in results:
+            offering_id_value = row[0]
+            course_id_value = row[1]
+            section_value = row[2]
+
+
+            offering = Offering(offering_id_value, course_id_value, section_value)
+            offering_list.append(offering)
+    except:
+        print("Error: unable to fetch data")
+
+    # disconnect from server
+    db.close()
+    return offering_list
