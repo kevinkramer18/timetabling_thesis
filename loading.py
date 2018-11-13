@@ -3,7 +3,7 @@ from professor import Professor
 from room import Room
 from course import Course
 from offering import Offering
-
+from day import Day
 # Import modules
 import pymysql
 
@@ -12,6 +12,7 @@ course_list = []
 faculty_list = []
 room_list = []
 offering_list = []
+day_list = []
 
 def load_course_list():
     # Open database connection
@@ -130,3 +131,37 @@ def load_offering_list():
     # disconnect from server
     db.close()
     return offering_list
+
+
+
+def load_day_list():
+    # Open database connection
+    db = pymysql.connect("localhost", "root", "root", "mysql")
+    # prepare a cursor object using cursor() method
+    cursor = db.cursor()
+
+    # Prepare SQL query to INSERT a record into the database.
+    sql = "SELECT * FROM timetabling.days"
+    try:
+        # Execute the SQL command
+        cursor.execute(sql)
+        # Fetch all the rows in a list of lists.
+        results = cursor.fetchall()
+        for row in results:
+            day_id_value = row[0]
+            room_id_value = row[1]
+            class_day_value = row[2]
+            begin_time_value = row[3]
+            end_time_value = row[4]
+
+
+
+
+            day = Day(day_id_value,room_id_value,class_day_value, begin_time_value, end_time_value )
+            day_list.append(day)
+    except:
+        print("Error: unable to fetch data")
+
+    # disconnect from server
+    db.close()
+    return day_list

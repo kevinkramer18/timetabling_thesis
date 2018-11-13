@@ -3,6 +3,7 @@ from professor import Professor
 from room import Room
 from course import Course
 from offering import Offering
+from day import Day
 
 # Loading lists of rooms, courses, & faculty
 from loading import load_course_list
@@ -14,6 +15,7 @@ course_list = list(load_course_list())
 room_list = list(load_room_list())
 faculty_list = list(load_faculty_list())
 offering_list = list(load_offering_list())
+day_list = list()
 
 for item in course_list:
     print(item.course_id, item.college_id, item.dept_id, item.course_code, item.units, item.course_type)

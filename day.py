@@ -1,6 +1,6 @@
 class Day:
     offering_id = ""
-    
+
     def __init__(self, days_id, room_id, class_day, begin_time, end_time):
         self.days_id = days_id
         self.room_id = room_id
