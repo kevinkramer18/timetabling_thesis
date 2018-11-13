@@ -122,7 +122,7 @@ def load_offering_list():
             section_value = row[2]
 
 
-            offering = Offering(offering_id_value, course_id_value, section_value)
+            offering = Offering(offering_id_value,course_id_value,section_value)
             offering_list.append(offering)
     except:
         print("Error: unable to fetch data")

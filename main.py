@@ -25,5 +25,5 @@ for item3 in faculty_list:
     print(item3.user_id, item3.first_name, item3.last_name, item3.load)
 print("\n")
 for item4 in offering_list:
-    print(item4.offering_id, item4.course_id, item4.section)
+    print(item4.offering_id, item4.course_id, item4.section, item4.room_id)
 
