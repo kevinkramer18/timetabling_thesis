@@ -1,5 +1,5 @@
 class Offering:
-    faculty_id = "1"
+    user_id = "1"
     room_id = "60"
     day1_id = 1
     day2_id = 2
