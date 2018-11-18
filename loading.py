@@ -32,7 +32,7 @@ def load_course_list():
             college_id_value = row[1]
             dept_id_value = row[2]
             course_code_value = row[3]
-            units_value = row[4]
+            units_value = float(row[4])
             course_type_value = row[5]
 
             course = Course(course_id_value, college_id_value, dept_id_value, course_code_value, units_value, course_type_value)
@@ -63,7 +63,7 @@ def load_room_list():
             room_id_value = row[0]
             room_code_value = row[1]
             room_type_value = row[3]
-            room_capacity_value = row[4]
+            room_capacity_value = int(row[4])
 
             room = Room(room_id_value, room_code_value, room_type_value, room_capacity_value)
             room_list.append(room)
@@ -92,7 +92,7 @@ def load_faculty_list():
             professor_id_value = row[0]
             professor_fname_value = row[1]
             professor_lname_value = row[2]
-            professor_load_value = row[3]
+            professor_load_value = float(row[3])
 
             professor = Professor(professor_id_value,professor_fname_value, professor_lname_value, professor_load_value)
             faculty_list.append(professor)
@@ -111,7 +111,7 @@ def load_offering_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT offering.offering_id, offering.course_id, offering.section FROM timetabling.offering where term = 1 and start_year = 2013;"
+    sql = "SELECT offering.offering_id, offering.section, offering.course_id,  course.course_code, course.units, offering.max_students_enrolled, course.course_type FROM timetabling.offering  INNER JOIN timetabling.course ON course.course_id = offering.course_id where term = 1 and start_year = 2013"
     try:
         # Execute the SQL command
         cursor.execute(sql)
@@ -119,11 +119,14 @@ def load_offering_list():
         results = cursor.fetchall()
         for row in results:
             offering_id_value = row[0]
-            course_id_value = row[1]
-            section_value = row[2]
+            section_value = row[1]
+            course_id_value = row[2]
+            course_code_value = row[3]
+            units_value = float(row[4])
+            max_students_value = int(row[5])
+            course_type_value = row[6]
 
-
-            offering = Offering(offering_id_value,course_id_value,section_value)
+            offering = Offering(offering_id_value,section_value, course_id_value,course_code_value, units_value, max_students_value, course_type_value)
             offering_list.append(offering)
     except:
         print("Error: unable to fetch data")
@@ -165,3 +168,4 @@ def load_day_list():
     # disconnect from server
     db.close()
     return day_list
+
