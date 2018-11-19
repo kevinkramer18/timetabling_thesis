@@ -111,7 +111,7 @@ def load_offering_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT offering.offering_id, offering.section, offering.course_id,  course.course_code, course.units, offering.max_students_enrolled, course.course_type FROM timetabling.offering  INNER JOIN timetabling.course ON course.course_id = offering.course_id where term = 1 and start_year = 2013"
+    sql = "SELECT offering.offering_id, offering.section, offering.course_id,  course.course_code, course.units, offering.max_students_enrolled, course.course_type FROM timetabling.offering  INNER JOIN timetabling.course ON course.course_id = offering.course_id where term = 1 and start_year = 2013 and college_id = 2 and course_code != 'LBYECON' "
     try:
         # Execute the SQL command
         cursor.execute(sql)
