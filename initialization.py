@@ -12,8 +12,9 @@ def initialize(faculty_list, offering_list):
                 item.professor_id = faculty_list[rand].professor_id
                 faculty_list[rand].load -= item.units
                 faculty_list[rand].units += item.units
-            else:
                 boolean = True
+            elif faculty_list[rand].load < item.units:
+                boolean = False
 
 
             ''' 
