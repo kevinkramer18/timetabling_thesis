@@ -144,7 +144,7 @@ def load_day_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT * FROM timetabling.days"
+    sql = "SELECT days.days_id, days.room_id, days.class_day, days.begin_time, days.end_time, room.room_type, room.room_code, room.room_capacity FROM timetabling.days INNER JOIN timetabling.room ON room.room_id = days.room_id"
     try:
         # Execute the SQL command
         cursor.execute(sql)
@@ -156,11 +156,14 @@ def load_day_list():
             class_day_value = row[2]
             begin_time_value = row[3]
             end_time_value = row[4]
+            room_type_value = row[5]
+            room_code_value = row[6]
+            room_capacity_value = row[7]
 
 
 
 
-            day = Day(day_id_value,room_id_value,class_day_value, begin_time_value, end_time_value )
+            day = Day(day_id_value,room_id_value,class_day_value, begin_time_value, end_time_value, room_type_value, room_code_value, room_capacity_value )
             day_list.append(day)
     except:
         print("Error: unable to fetch data")

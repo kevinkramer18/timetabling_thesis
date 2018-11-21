@@ -42,7 +42,7 @@ for item4 in offering_list:
     print(item4.offering_id, item4.section, item4.course_id, item4.course_code, item4.units, item4.max_students, item4.course_type, item4.room_id)
 print ("\n")
 for item5 in day_list:
-    print(item5.days_id, item5.room_id, item5.class_day, item5.begin_time, item5.end_time)
+    print(item5.days_id, item5.room_id, item5.class_day, item5.begin_time, item5.end_time, item5.room_type, item5.room_code, item5.room_capacity)
 
 
 # print(offering_list..index("1496"))

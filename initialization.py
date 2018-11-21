@@ -34,14 +34,21 @@ def initialize(faculty_list, offering_list, room_list, day_list):
     for object2 in faculty_list:
         print(object2.professor_id, object2.first_name, object2.last_name, object2.load, object2.units)
 
+    for item2 in offering_list:
+            rand = random.randint(0, len(day_list) - 1)
+            print(day_list[rand].room_id, day_list[rand].class_day)
 
+
+  #  room_list[room_list.index(day_list[rand].room_id)].room_type
 # THIS WORKS ABOVE^^^
+
+    ''' 
     for item2 in offering_list:
         boolean = False
         while not boolean:
             rand = random.randint(0, len(day_list) - 1)
-            if item2.course_type == day_list[rand].room_type and item2.max_students == room_list[day_list[rand].room_id]:
-
+            if item2.course_type == room_list[room_list.index(day_list[rand].room_id)].room_type and item2.max_students == room_list[day_list[rand].room_id]:
+    '''
 
 
 
