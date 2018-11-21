@@ -52,4 +52,4 @@ for object in offering_list:
    if object.course_id == 1496:
        print(object.section)
 '''
-initialize(faculty_list, offering_list)
+initialize(faculty_list, offering_list, room_list, day_list)
