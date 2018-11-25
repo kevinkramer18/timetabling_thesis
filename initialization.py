@@ -3,6 +3,7 @@ import random
 
 
 def initialize(faculty_list, offering_list, room_list, day_list):
+    sections = []
 
     for item in offering_list:
         boolean = False
@@ -47,10 +48,46 @@ def initialize(faculty_list, offering_list, room_list, day_list):
         boolean = False
         while not boolean:
             rand = random.randint(0, len(day_list) - 1)
-            if item2.course_type == day_list[rand].room_type and item2.max_students == day_list[rand].room_capacity:
+            if item2.course_type == day_list[rand].room_type and item2.max_students == day_list[rand].room_capacity and day_list[rand].offering_id == "":
+                if item2.units == 1:
+                    day_list[rand].offering_id = item2.offering_id
+                    item2.day1_id = day_list[rand].days_id
+
+                elif item2.units == 3:
+                    if  day_list[rand].class_day == 'M':
+                        day_list[rand].offering_id = item2.offering_id
+                        item2.day1_id = day_list[rand].days_id
+                        item2.day2_id = day_list[rand+1].days_id
+
+                    elif day_list[rand].class_day == 'W':
+                        day_list[rand].offering_id = item2.offering_id
+                        item2.day1_id = day_list[rand-1].days_id
+                        item2.day2_id = day_list[rand].days_id
+
+                    elif day_list[rand].class_day == 'T':
+                        day_list[rand].offering_id = item2.offering_id
+                        item2.day1_id = day_list[rand].days_id
+                        item2.day2_id = day_list[rand+1].days_id
+
+                    elif day_list[rand].class_day == 'H':
+                        day_list[rand].offering_id = item2.offering_id
+                        item2.day1_id = day_list[rand - 1].days_id
+                        item2.day2_id = day_list[rand].days_id
+
+                    elif day_list[rand].class_day == 'F':
+                        day_list[rand].offering_id = item2.offering_id
+                        item2.day1_id = day_list[rand].days_id
+                        item2.day2_id = day_list[rand+1].days_id
+
+                    '''
+                    day_list[rand].offering_id = item2.offering_id
+                    item2.day1_id = day_list[rand].days_id
+                    item2.day2_id = day_list[rand].days_id
+                    '''
                 print("test")
                 boolean = True
             else:
                 boolean = False
-
+    for test in offering_list:
+        print(test.course_id, test.course_code, test.day1_id, test.day2_id)
 
