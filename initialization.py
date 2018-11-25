@@ -54,31 +54,31 @@ def initialize(faculty_list, offering_list, room_list, day_list):
                     item2.day1_id = day_list[rand].days_id
 
                 elif item2.units == 3:
-                    if  day_list[rand].class_day == 'M':
+                    if  day_list[rand].class_day == 'M' and day_list[rand+1].offering_id == "":
                         day_list[rand].offering_id = item2.offering_id
                         day_list[rand+1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand].days_id
                         item2.day2_id = day_list[rand+1].days_id
 
-                    elif day_list[rand].class_day == 'W':
+                    elif day_list[rand].class_day == 'W' and day_list[rand-1].offering_id == "":
                         day_list[rand].offering_id = item2.offering_id
                         day_list[rand-1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand-1].days_id
                         item2.day2_id = day_list[rand].days_id
 
-                    elif day_list[rand].class_day == 'T':
+                    elif day_list[rand].class_day == 'T' and day_list[rand+1].offering_id == "":
                         day_list[rand].offering_id = item2.offering_id
                         day_list[rand+1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand].days_id
                         item2.day2_id = day_list[rand+1].days_id
 
-                    elif day_list[rand].class_day == 'H':
+                    elif day_list[rand].class_day == 'H'and day_list[rand-1].offering_id == "":
                         day_list[rand].offering_id = item2.offering_id
                         day_list[rand-1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand - 1].days_id
                         item2.day2_id = day_list[rand].days_id
 
-                    elif day_list[rand].class_day == 'F':
+                    elif day_list[rand].class_day == 'F' and day_list[rand+1].offering_id == "":
                         day_list[rand].offering_id = item2.offering_id
                         day_list[rand+1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand].days_id
@@ -94,5 +94,5 @@ def initialize(faculty_list, offering_list, room_list, day_list):
             else:
                 boolean = False
     for test in offering_list:
-        print(test.course_id, test.course_code, test.day1_id, test.day2_id)
+        print(test.course_id, test.course_code, test.day1_id, test.day2_id, test.section, test.professor_id)
 
