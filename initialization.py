@@ -56,26 +56,31 @@ def initialize(faculty_list, offering_list, room_list, day_list):
                 elif item2.units == 3:
                     if  day_list[rand].class_day == 'M':
                         day_list[rand].offering_id = item2.offering_id
+                        day_list[rand+1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand].days_id
                         item2.day2_id = day_list[rand+1].days_id
 
                     elif day_list[rand].class_day == 'W':
                         day_list[rand].offering_id = item2.offering_id
+                        day_list[rand-1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand-1].days_id
                         item2.day2_id = day_list[rand].days_id
 
                     elif day_list[rand].class_day == 'T':
                         day_list[rand].offering_id = item2.offering_id
+                        day_list[rand+1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand].days_id
                         item2.day2_id = day_list[rand+1].days_id
 
                     elif day_list[rand].class_day == 'H':
                         day_list[rand].offering_id = item2.offering_id
+                        day_list[rand-1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand - 1].days_id
                         item2.day2_id = day_list[rand].days_id
 
                     elif day_list[rand].class_day == 'F':
                         day_list[rand].offering_id = item2.offering_id
+                        day_list[rand+1].offering_id = item2.offering_id
                         item2.day1_id = day_list[rand].days_id
                         item2.day2_id = day_list[rand+1].days_id
 

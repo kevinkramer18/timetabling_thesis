@@ -1,8 +1,8 @@
 class Offering:
     professor_id = "1"
     room_id = "60"
-    day1_id = 1
-    day2_id = 2
+    day1_id = 0
+    day2_id = 0
 
     def __init__(self, offering_id, section, course_id, course_code, units, max_students, course_type):
         self.offering_id = offering_id
