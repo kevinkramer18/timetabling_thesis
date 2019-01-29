@@ -13,7 +13,7 @@ def initialize(faculty_list, offering_list, room_list, day_list):
                 item.professor_id = faculty_list[rand].professor_id
                 faculty_list[rand].load -= item.units
                 faculty_list[rand].units += item.units
-             #   faculty_list[rand].assigned_offerings.append(item.offering_id)
+                faculty_list[rand].assigned_offerings.append(item.offering_id)
                 boolean = True
             elif faculty_list[rand].load < item.units:
                 boolean = False
@@ -95,4 +95,3 @@ def initialize(faculty_list, offering_list, room_list, day_list):
                 boolean = False
     for test in offering_list:
         print(test.course_id, test.course_code, test.day1_id, test.day2_id, test.section, test.professor_id)
-
