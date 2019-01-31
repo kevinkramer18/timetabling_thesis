@@ -4,7 +4,7 @@ import random
 
 def initialize(faculty_list, offering_list, room_list, day_list):
     sections = []
-
+  # Assign offerings to faculty
     for item in offering_list:
         boolean = False
         while not boolean:
@@ -44,6 +44,8 @@ def initialize(faculty_list, offering_list, room_list, day_list):
             rand = random.randint(0, len(day_list) - 1)
             if item2.course_type == room_list[room_list.index(day_list[rand].room_id)].room_type and item2.max_students == room_list[day_list[rand].room_id]:
     '''
+
+    # Assign day timeslots to faculty's offerings
     for item2 in offering_list:
         boolean = False
         while not boolean:
