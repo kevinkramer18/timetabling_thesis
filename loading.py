@@ -3,7 +3,7 @@ from professor import Professor
 from room import Room
 from course import Course
 from offering import Offering
-from day import Day
+from timeslot import Timeslot
 # Import modules
 import pymysql
 
@@ -12,7 +12,7 @@ course_list = []
 faculty_list = []
 room_list = []
 offering_list = []
-day_list = []
+timeslot_list = []
 
 def load_course_list():
     # Open database connection
@@ -137,21 +137,21 @@ def load_offering_list():
 
 
 
-def load_day_list():
+def load_timeslot_list():
     # Open database connection
     db = pymysql.connect("localhost", "root", "root", "mysql")
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT days.days_id, days.room_id, days.class_day, days.begin_time, days.end_time, room.room_type, room.room_code, room.room_capacity FROM timetabling.days INNER JOIN timetabling.room ON room.room_id = days.room_id"
+    sql = "SELECT timeslots.timeslots_id, timeslots.room_id, timeslots.class_day, timeslots.begin_time, timeslots.end_time, room.room_type, room.room_code, room.room_capacity FROM timetabling.timeslots INNER JOIN timetabling.room ON room.room_id = timeslots.room_id"
     try:
         # Execute the SQL command
         cursor.execute(sql)
         # Fetch all the rows in a list of lists.
         results = cursor.fetchall()
         for row in results:
-            day_id_value = row[0]
+            timeslots_id_value = row[0]
             room_id_value = row[1]
             class_day_value = row[2]
             begin_time_value = row[3]
@@ -163,12 +163,12 @@ def load_day_list():
 
 
 
-            day = Day(day_id_value,room_id_value,class_day_value, begin_time_value, end_time_value, room_type_value, room_code_value, room_capacity_value )
-            day_list.append(day)
+            timeslot = Timeslot(timeslots_id_value,room_id_value,class_day_value, begin_time_value, end_time_value, room_type_value, room_code_value, room_capacity_value )
+            timeslot_list.append(timeslot)
     except:
         print("Error: unable to fetch data")
 
     # disconnect from server
     db.close()
-    return day_list
+    return timeslot_list
 
