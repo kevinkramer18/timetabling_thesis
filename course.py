@@ -1,5 +1,4 @@
 class Course:
-
         def __init__(self, course_id, college_id, dept_id, course_code, units, course_type):
             self.course_id = course_id
             self.college_id = college_id

@@ -1,5 +1,4 @@
 class Timeslot:
-    offering_id = ""
 
     def __init__(self, timeslot_id, room_id, class_day, begin_time, end_time, room_type, room_code, room_capacity):
         self.timeslot_id = timeslot_id
@@ -10,3 +9,4 @@ class Timeslot:
         self.room_type = room_type
         self.room_code = room_code
         self.room_capacity = room_capacity
+        self.offering_id = ""
