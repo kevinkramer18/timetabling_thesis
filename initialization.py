@@ -2,7 +2,7 @@ import random
 
 
 
-def initialize(faculty_list, offering_list, room_list, timeslot_list):
+def initialize(faculty_list, offering_list, timeslot_list):
     sections = []
   # Assign offerings to faculty
     for item in offering_list:
@@ -28,13 +28,13 @@ def initialize(faculty_list, offering_list, room_list, timeslot_list):
                 faculty_list[rand].load -= item.units
                 boolean = 1
             '''
-
-
     for object in offering_list:
         print(object.professor_id, object.course_code, object.section)
+    print("\n")
+
     for object2 in faculty_list:
         print(object2.professor_id, object2.first_name, object2.last_name, object2.load, object2.units)
-
+    print("\n")
 # THIS WORKS ABOVE^^^
 
     ''' 

@@ -3,6 +3,7 @@ class Offering:
     room_id = "60"
     timeslot1_id = 0
     timeslot2_id = 0
+    college_id = 0
 
     def __init__(self, offering_id, section, course_id, course_code, units, max_students, course_type, flowchart_id):
         self.offering_id = offering_id

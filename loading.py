@@ -1,6 +1,5 @@
 # Import classes
 from professor import Professor
-from room import Room
 from course import Course
 from offering import Offering
 from timeslot import Timeslot
@@ -10,7 +9,6 @@ import pymysql
 # Declaring variables
 course_list = []
 faculty_list = []
-room_list = []
 offering_list = []
 timeslot_list = []
 
@@ -46,35 +44,6 @@ def load_course_list():
 
 
 
-def load_room_list():
-    # Open database connection
-    db = pymysql.connect("localhost", "root", "root", "mysql")
-    # prepare a cursor object using cursor() method
-    cursor = db.cursor()
-
-    # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT * FROM timetabling.room WHERE room_code NOT LIKE '%AG%'"
-    try:
-        # Execute the SQL command
-        cursor.execute(sql)
-        # Fetch all the rows in a list of lists.
-        results = cursor.fetchall()
-        for row in results:
-            room_id_value = row[0]
-            room_code_value = row[1]
-            room_type_value = row[3]
-            room_capacity_value = int(row[4])
-
-            room = Room(room_id_value, room_code_value, room_type_value, room_capacity_value)
-            room_list.append(room)
-    except:
-        print("Error: unable to fetch data")
-
-    # disconnect from server
-    db.close()
-    return room_list
-
-
 def load_faculty_list():
     # Open database connection
     db = pymysql.connect("localhost", "root", "root", "mysql")
@@ -82,7 +51,7 @@ def load_faculty_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT users.user_id, users.first_name, users.last_name,  loads.teaching_load  FROM timetabling.users INNER JOIN timetabling.faculty ON faculty.user_id = users.user_id INNER JOIN timetabling.loads  ON loads.faculty_id = faculty.faculty_id WHERE loads.term = 1 AND loads.start_year = 2013 "
+    sql = "SELECT users.user_id, users.first_name, users.last_name,  loads.teaching_load, coursepreference.course_id, coursepreference.course_id2, coursepreference.course_id3 FROM timetabling.users INNER JOIN timetabling.faculty ON faculty.user_id = users.user_id INNER JOIN timetabling.loads ON loads.faculty_id = faculty.faculty_id INNER JOIN timetabling.coursepreference ON coursepreference.user_id = users.user_id WHERE loads.term = 1 AND loads.start_year = 2013 "
     try:
         # Execute the SQL command
         cursor.execute(sql)
@@ -93,8 +62,15 @@ def load_faculty_list():
             professor_fname_value = row[1]
             professor_lname_value = row[2]
             professor_load_value = float(row[3])
+            professor_pcourse1 = row[4]
+            professor_pcourse2 = row[5]
+            professor_pcourse3 = row[6]
 
             professor = Professor(professor_id_value,professor_fname_value, professor_lname_value, professor_load_value)
+            professor.preferred_courses.append(professor_pcourse1)
+            professor.preferred_courses.append(professor_pcourse2)
+            professor.preferred_courses.append(professor_pcourse3)
+
             faculty_list.append(professor)
     except:
         print("Error: unable to fetch data")
@@ -102,6 +78,7 @@ def load_faculty_list():
     # disconnect from server
     db.close()
     return faculty_list
+
 
 
 def load_offering_list():
@@ -171,4 +148,6 @@ def load_timeslot_list():
     # disconnect from server
     db.close()
     return timeslot_list
+
+
 
