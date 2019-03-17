@@ -1,4 +1,5 @@
 class Professor:
+
     def __init__(self, user_id, first_name, last_name,  load):
         self.professor_id = user_id
         self.first_name = first_name

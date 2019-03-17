@@ -19,7 +19,7 @@ def load_course_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT c1.course_id, c1.college_id, c1.dept_id, c1.course_code, c1.units, c1.course_type FROM timetabling.course c1 INNER JOIN timetabling.offering o1 ON c1.course_id = o1.course_id WHERE  o1.start_year =2013 AND o1.term=1 AND c1.course_id != 1686 AND c1.college_id =2"
+    sql = "SELECT c1.course_id, c1.college_id, c1.dept_id, c1.course_code, c1.units, c1.course_type FROM timetabling.course c1 INNER JOIN timetabling.offering o1 ON c1.course_id = o1.course_id WHERE  o1.start_year =2015 AND o1.term=1 AND c1.course_id != 1686 AND c1.college_id =2"
     try:
         # Execute the SQL command
         cursor.execute(sql)
@@ -51,7 +51,7 @@ def load_faculty_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT users.user_id, users.first_name, users.last_name,  loads.teaching_load, coursepreference.course_id, coursepreference.course_id2, coursepreference.course_id3 FROM timetabling.users INNER JOIN timetabling.faculty ON faculty.user_id = users.user_id INNER JOIN timetabling.loads ON loads.faculty_id = faculty.faculty_id INNER JOIN timetabling.coursepreference ON coursepreference.user_id = users.user_id WHERE loads.term = 1 AND loads.start_year = 2013 "
+    sql = "SELECT users.user_id, users.first_name, users.last_name,  loads.teaching_load, coursepreference.course_id, coursepreference.course_id2, coursepreference.course_id3 FROM timetabling.users INNER JOIN timetabling.faculty ON faculty.user_id = users.user_id INNER JOIN timetabling.loads ON loads.faculty_id = faculty.faculty_id INNER JOIN timetabling.coursepreference ON coursepreference.user_id = users.user_id WHERE loads.term = 1 AND loads.start_year = 2013  "
     try:
         # Execute the SQL command
         cursor.execute(sql)
@@ -62,14 +62,17 @@ def load_faculty_list():
             professor_fname_value = row[1]
             professor_lname_value = row[2]
             professor_load_value = float(row[3])
-            professor_pcourse1 = row[4]
-            professor_pcourse2 = row[5]
-            professor_pcourse3 = row[6]
+            cpref = row[4]
+            cpref2 = row[5]
+            cpref3 = row[6]
 
             professor = Professor(professor_id_value,professor_fname_value, professor_lname_value, professor_load_value)
-            professor.preferred_courses.append(professor_pcourse1)
-            professor.preferred_courses.append(professor_pcourse2)
-            professor.preferred_courses.append(professor_pcourse3)
+            if cpref is not None:
+                professor.preferred_courses.append(cpref)
+            if cpref2 is not None:
+                professor.preferred_courses.append(cpref2)
+            if cpref3 is not None:
+                professor.preferred_courses.append(cpref3)
 
             faculty_list.append(professor)
     except:
@@ -88,7 +91,7 @@ def load_offering_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT offering.offering_id, offering.section, offering.course_id,  course.course_code, course.units, offering.max_students_enrolled, course.course_type,flowcourses.flowchart_id FROM timetabling.offering  INNER JOIN timetabling.course ON course.course_id = offering.course_id INNER JOIN timetabling.flowcourses on flowcourses.course_id=course.course_id where offering.term = 1 and start_year = 2013 and college_id = 2 and course_code != 'LBYECON' "
+    sql = "SELECT offering.offering_id, offering.section, offering.course_id,  course.course_code, course.units, offering.max_students_enrolled, course.course_type,flowcourses.flowchart_id FROM timetabling.offering  INNER JOIN timetabling.course ON course.course_id = offering.course_id INNER JOIN timetabling.flowcourses on flowcourses.course_id=course.course_id where offering.term = 1 and start_year = 2015 and college_id = 2 and course_code != 'LBYECON' "
     try:
         # Execute the SQL command
         cursor.execute(sql)

@@ -8,6 +8,7 @@ def initialize(faculty_list, offering_list, timeslot_list):
     for item in offering_list:
         boolean = False
         while not boolean:
+            print("assigning offerings to faculty")
             rand = random.randint(0, len(faculty_list)-1)
             if faculty_list[rand].load >= item.units:
                 item.professor_id = faculty_list[rand].professor_id
