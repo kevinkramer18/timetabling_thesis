@@ -3,6 +3,8 @@ from professor import Professor
 from course import Course
 from offering import Offering
 from timeslot import Timeslot
+from generalcourse import GeneralCourse
+
 # Import modules
 import pymysql
 
@@ -11,6 +13,8 @@ course_list = []
 faculty_list = []
 offering_list = []
 timeslot_list = []
+general_course_list = []
+
 
 def load_course_list():
     # Open database connection
@@ -140,9 +144,6 @@ def load_timeslot_list():
             room_code_value = row[6]
             room_capacity_value = row[7]
 
-
-
-
             timeslot = Timeslot(timeslots_id_value,room_id_value,class_day_value, begin_time_value, end_time_value, room_type_value, room_code_value, room_capacity_value )
             timeslot_list.append(timeslot)
     except:
@@ -152,5 +153,40 @@ def load_timeslot_list():
     db.close()
     return timeslot_list
 
+
+def load_general_course_list():
+    # Open database connection
+    db = pymysql.connect("localhost", "root", "root", "mysql")
+    # prepare a cursor object using cursor() method
+    cursor = db.cursor()
+
+    # Prepare SQL query to INSERT a record into the database.
+    sql = "SELECT coursecode, offeredto, facultyname, Room1, start_year, end_year, term, start_time, end_time, day1, day2 FROM timetabling.generalcourses WHERE term = 1 and start_year = 2015;"
+    try:
+        # Execute the SQL command
+        cursor.execute(sql)
+        # Fetch all the rows in a list of lists.
+        results = cursor.fetchall()
+        for row in results:
+            course_code_value = row[0]
+            section_value = row[1]
+            faculty_name_value = row[2]
+            room_value = row[3]
+            start_year_value = row[4]
+            end_year_value = row[5]
+            term_value = row[6]
+            start_time_value = row[7]
+            end_time_value = row[8]
+            day1_value = row[9]
+            day2_value = row[10]
+
+            general_course = GeneralCourse(course_code_value, section_value, faculty_name_value, room_value, start_year_value, end_year_value,term_value, start_time_value, end_time_value, day1_value, day2_value )
+            general_course_list.append(general_course)
+    except:
+        print("Error: unable to fetch data")
+
+    # disconnect from server
+    db.close()
+    return general_course_list
 
 

@@ -3,14 +3,14 @@ from professor import Professor
 from course import Course
 from offering import Offering
 from timeslot import Timeslot
-
+from generalcourse import GeneralCourse
 
 # Import Functions from Loading
 from loading import load_course_list
 from loading import load_faculty_list
 from loading import load_offering_list
 from loading import load_timeslot_list
-
+from loading import load_general_course_list
 
 # Import Functions from Initialization
 from initialization import initialize
@@ -21,7 +21,7 @@ course_list = list(load_course_list())
 faculty_list = list(load_faculty_list())
 offering_list = list(load_offering_list())
 timeslot_list = list(load_timeslot_list())
-
+general_course_list = list(load_general_course_list())
 
 
 # Print Test of Loading Functions
@@ -42,6 +42,9 @@ for item5 in timeslot_list:
     print(item5.timeslot_id, item5.room_id, item5.class_day, item5.begin_time, item5.end_time, item5.room_type, item5.room_code, item5.room_capacity)
 print ("\n")
 
+print("General Course List")
+for item6 in general_course_list:
+    print(item6.course_code, item6.section, item6.faculty_name, item6.room, item6.start_year, item6.end_year, item6.term, item6.start_time, item6.end_time, item6.day1, item6.day2)
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
 initialize(faculty_list, offering_list, timeslot_list)
