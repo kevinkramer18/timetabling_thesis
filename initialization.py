@@ -55,6 +55,7 @@ def initialize(faculty_list, offering_list, timeslot_list):
                 if item2.units == 1:
                     timeslot_list[rand].offering_id = item2.offering_id
                     item2.timeslot1_id = timeslot_list[rand].timeslot_id
+                    item2.room_id = timeslot_list[rand].room_code
 
                 elif item2.units == 3:
                     if  timeslot_list[rand].class_day == 'M' and timeslot_list[rand+1].offering_id == "":
@@ -62,30 +63,35 @@ def initialize(faculty_list, offering_list, timeslot_list):
                         timeslot_list[rand+1].offering_id = item2.offering_id
                         item2.timeslot1_id = timeslot_list[rand].timeslot_id
                         item2.timeslot2_id = timeslot_list[rand+1].timeslot_id
+                        item2.room_id = timeslot_list[rand].room_code
 
                     elif timeslot_list[rand].class_day == 'W' and timeslot_list[rand-1].offering_id == "":
                         timeslot_list[rand].offering_id = item2.offering_id
                         timeslot_list[rand-1].offering_id = item2.offering_id
                         item2.timeslot1_id = timeslot_list[rand-1].timeslot_id
                         item2.timeslot2_id = timeslot_list[rand].timeslot_id
+                        item2.room_id = timeslot_list[rand].room_code
 
                     elif timeslot_list[rand].class_day == 'T' and timeslot_list[rand+1].offering_id == "":
                         timeslot_list[rand].offering_id = item2.offering_id
                         timeslot_list[rand+1].offering_id = item2.offering_id
                         item2.timeslot1_id = timeslot_list[rand].timeslot_id
                         item2.timeslot2_id = timeslot_list[rand+1].timeslot_id
+                        item2.room_id = timeslot_list[rand].room_code
 
                     elif timeslot_list[rand].class_day == 'H'and timeslot_list[rand-1].offering_id == "":
                         timeslot_list[rand].offering_id = item2.offering_id
                         timeslot_list[rand-1].offering_id = item2.offering_id
                         item2.timeslot1_id = timeslot_list[rand - 1].timeslot_id
                         item2.timeslot2_id = timeslot_list[rand].timeslot_id
+                        item2.room_id = timeslot_list[rand].room_code
 
                     elif timeslot_list[rand].class_day == 'F' and timeslot_list[rand+1].offering_id == "":
                         timeslot_list[rand].offering_id = item2.offering_id
                         timeslot_list[rand+1].offering_id = item2.offering_id
                         item2.timeslot1_id = timeslot_list[rand].timeslot_id
                         item2.timeslot2_id = timeslot_list[rand+1].timeslot_id
+                        item2.room_id = timeslot_list[rand].room_code
 
                     '''
                     timeslot_list[rand].offering_id = item2.offering_id
@@ -97,4 +103,4 @@ def initialize(faculty_list, offering_list, timeslot_list):
             else:
                 boolean = False
     for test in offering_list:
-        print(test.course_id, test.course_code, test.timeslot1_id, test.timeslot2_id, test.section, test.professor_id)
+        print(test.course_id, test.course_code, test.timeslot1_id, test.timeslot2_id, test.section, test.professor_id, test.room_id)
