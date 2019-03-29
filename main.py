@@ -26,7 +26,6 @@ general_course_list = list(load_general_course_list())
 section_list = list(load_section_list())
 
 
-
 # Print Test of Loading Functions
 unit = 0
 print("Faculty List")
@@ -65,7 +64,7 @@ print ("\n")
 
 print("Section List")
 for item in section_list:
-    print(item.section_id)
+    print(item.section_id, item.section_schedule)
 print("\n")
 
 
