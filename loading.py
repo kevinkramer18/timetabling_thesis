@@ -95,7 +95,7 @@ def load_offering_list():
     cursor = db.cursor()
 
     # Prepare SQL query to INSERT a record into the database.
-    sql = "SELECT offering.offering_id, offering.section, offering.course_id,  course.course_code, course.units, offering.max_students_enrolled, course.course_type,flowcourses.flowchart_id FROM timetabling.offering  INNER JOIN timetabling.course ON course.course_id = offering.course_id INNER JOIN timetabling.flowcourses on flowcourses.course_id=course.course_id where offering.term = 1 and start_year = 2015 and college_id = 2 and course_code != 'LBYECON' "
+    sql = "SELECT offering.offering_id, offering.section, offering.course_id,  course.course_code, course.units, offering.max_students_enrolled, course.course_type FROM timetabling.offering  INNER JOIN timetabling.course ON course.course_id = offering.course_id  where offering.term = 2 and start_year = 2015 and college_id = 2 and course_code != 'LBYECON' "
     try:
         # Execute the SQL command
         cursor.execute(sql)
@@ -109,8 +109,8 @@ def load_offering_list():
             units_value = float(row[4])
             max_students_value = int(row[5])
             course_type_value = row[6]
-            flowchart_id_value = row[7]
-            offering = Offering(offering_id_value,section_value, course_id_value,course_code_value, units_value, max_students_value, course_type_value,flowchart_id_value)
+
+            offering = Offering(offering_id_value,section_value, course_id_value,course_code_value, units_value, max_students_value, course_type_value)
             offering_list.append(offering)
     except:
         print("Error: unable to fetch data")

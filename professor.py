@@ -1,3 +1,5 @@
+from schedule import Schedule
+
 class Professor:
 
     def __init__(self, user_id, first_name, last_name,  load):
@@ -7,4 +9,5 @@ class Professor:
         self.load = load
         self.preferred_courses = []
         self.assigned_offerings = []
+        self.schedule = []
         self.units = 0

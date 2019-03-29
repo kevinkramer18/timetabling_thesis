@@ -4,6 +4,7 @@ from course import Course
 from offering import Offering
 from timeslot import Timeslot
 from generalcourse import GeneralCourse
+from schedule import Schedule
 
 # Import Functions from Loading
 from loading import load_course_list
@@ -25,19 +26,24 @@ general_course_list = list(load_general_course_list())
 
 
 # Print Test of Loading Functions
+unit = 0
 print("Faculty List")
 for item in faculty_list:
     print(item.professor_id, item.first_name, item.last_name, item.load)
+    unit += item.load
     for item2 in item.preferred_courses:
         print(item2)
 print("\n")
+print(unit)
 
+unit = 0
 print("Offering List")
 for item in offering_list:
-    print(item.offering_id, item.section, item.course_id, item.course_code, item.units, item.max_students, item.course_type, item.room_id, item.flowchart_id)
+    print(item.offering_id, item.section, item.course_id, item.course_code, item.units, item.max_students, item.course_type, item.room_id)
+    unit += item.units
 print ("\n")
 
-
+print(unit)
 print("General Course List")
 for item in general_course_list:
     print(item.course_code, item.section, item.faculty_name, item.room, item.start_year, item.end_year, item.term, item.start_time, item.end_time, item.day1, item.day2)
