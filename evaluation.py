@@ -33,3 +33,12 @@ def fitness_function_3 (faculty_list):
     score = aViolations
 
     return score
+
+
+
+def section_checking(timeslot, section_list):
+    for item in section_list:
+        if timeslot not in item.section_schedule:
+            return True
+        else:
+            return False

@@ -1,5 +1,5 @@
 import random
-
+from evaluation import section_checking
 
 def initialize(faculty_list, offering_list, timeslot_list, section_list):
     sections = []
@@ -36,8 +36,8 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
         while not boolean:
             rand = random.randint(0, len(timeslot_list) - 2)
             for item2 in faculty_list:
-                #Checks if offering conflicts with professor's schedule
-                if item.offering_id in item2.assigned_offerings and timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time) not in item2.schedule:
+                #Checks if offering conflicts with professor's schedule and section schedule
+                if section_checking(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time), section_list) and item.offering_id in item2.assigned_offerings and timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time) not in item2.schedule:
                     #Checks if room matches offering's requirements and that the timeslot isn't already taken
                     if item.course_type == timeslot_list[rand].room_type and item.max_students == timeslot_list[rand].room_capacity and timeslot_list[rand].offering_id == "":
                         if item.units == 1:
@@ -45,7 +45,14 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
                             item.timeslot1_id = timeslot_list[rand].timeslot_id
                             item.room_id = timeslot_list[rand].room_code
 
+                            #Updates Faculty schedule
                             item2.schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
+
+                            #Updates Section schedule
+                            for x in section_list:
+                                if item.section == x.section_id:
+                                    x.section_schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
+                                    x.section_schedule.append( timeslot_list[rand].class_day + str(timeslot_list[rand].end_time))
 
                         elif item.units == 3:
                             if timeslot_list[rand].class_day == 'M' and timeslot_list[rand + 1].offering_id == "":
@@ -55,8 +62,18 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
                                 item.timeslot2_id = timeslot_list[rand + 1].timeslot_id
                                 item.room_id = timeslot_list[rand].room_code
 
+                                # Updates Faculty Schedule
                                 item2.schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
                                 item2.schedule.append(timeslot_list[rand+1].class_day + str(timeslot_list[rand+1].begin_time))
+
+                                # Updates Section schedule
+                                for x in section_list:
+                                    if item.section == x.section_id:
+                                        x.section_schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
+                                        x.section_schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].end_time))
+                                        x.section_schedule.append(timeslot_list[rand+1].class_day + str(timeslot_list[rand+1].begin_time))
+                                        x.section_schedule.append( timeslot_list[rand+1].class_day + str(timeslot_list[rand+1].end_time))
+
 
 
                             elif timeslot_list[rand].class_day == 'W' and timeslot_list[rand - 1].offering_id == "":
@@ -66,8 +83,20 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
                                 item.timeslot2_id = timeslot_list[rand].timeslot_id
                                 item.room_id = timeslot_list[rand].room_code
 
+                                #Updates Faculty Schedule
+
                                 item2.schedule.append( timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
                                 item2.schedule.append(timeslot_list[rand -1].class_day + str(timeslot_list[rand - 1].begin_time))
+
+                                #Updates Section Schedule
+                                for x in section_list:
+                                    if item.section == x.section_id:
+                                        x.section_schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
+                                        x.section_schedule.append( timeslot_list[rand].class_day + str(timeslot_list[rand].end_time))
+                                        x.section_schedule.append(timeslot_list[rand - 1].class_day + str(timeslot_list[rand - 1].begin_time))
+                                        x.section_schedule.append(timeslot_list[rand - 1].class_day + str(timeslot_list[rand - 1].end_time))
+
+
 
                             elif timeslot_list[rand].class_day == 'T' and timeslot_list[rand + 1].offering_id == "":
                                 timeslot_list[rand].offering_id = item.offering_id
@@ -76,8 +105,17 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
                                 item.timeslot2_id = timeslot_list[rand + 1].timeslot_id
                                 item.room_id = timeslot_list[rand].room_code
 
+                                #Updates Faculty Schedule
                                 item2.schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
                                 item2.schedule.append(timeslot_list[rand + 1].class_day + str(timeslot_list[rand + 1].begin_time))
+
+                                # Updates Section schedule
+                                for x in section_list:
+                                    if item.section == x.section_id:
+                                        x.section_schedule.append( timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
+                                        x.section_schedule.append( timeslot_list[rand].class_day + str(timeslot_list[rand].end_time))
+                                        x.section_schedule.append(timeslot_list[rand+1].class_day + str(timeslot_list[rand + 1].begin_time))
+                                        x.section_schedule.append(timeslot_list[rand+1].class_day + str(timeslot_list[rand + 1].end_time))
 
                             elif timeslot_list[rand].class_day == 'H' and timeslot_list[rand - 1].offering_id == "":
                                 timeslot_list[rand].offering_id = item.offering_id
@@ -86,8 +124,19 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
                                 item.timeslot2_id = timeslot_list[rand].timeslot_id
                                 item.room_id = timeslot_list[rand].room_code
 
+                                # Updates Faculty Schedule
+
                                 item2.schedule.append( timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
                                 item2.schedule.append( timeslot_list[rand - 1].class_day + str(timeslot_list[rand - 1].begin_time))
+
+                                # Updates Section Schedule
+                                for x in section_list:
+                                    if item.section == x.section_id:
+                                        x.section_schedule.append( timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
+                                        x.section_schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].end_time))
+                                        x.section_schedule.append(timeslot_list[rand - 1].class_day + str(timeslot_list[rand - 1].begin_time))
+                                        x.section_schedule.append(timeslot_list[rand - 1].class_day + str(timeslot_list[rand - 1].end_time))
+
 
                             elif timeslot_list[rand].class_day == 'F' and timeslot_list[rand + 1].offering_id == "" and timeslot_list[rand].begin_time != 1245:
                                 timeslot_list[rand].offering_id = item.offering_id
@@ -98,6 +147,14 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
 
                                 item2.schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
                                 item2.schedule.append(timeslot_list[rand + 1].class_day + str(timeslot_list[rand + 1].begin_time))
+
+                                # Updates Section Schedule
+                                for x in section_list:
+                                    if item.section == x.section_id:
+                                        x.section_schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time))
+                                        x.section_schedule.append(timeslot_list[rand].class_day + str(timeslot_list[rand].end_time))
+                                        x.section_schedule.append( timeslot_list[rand + 1].class_day + str(timeslot_list[rand + 1].begin_time))
+                                        x.section_schedule.append(timeslot_list[rand + 1].class_day + str(timeslot_list[rand + 1].end_time))
 
                         print("test")
                         if item.timeslot1_id == 0:
@@ -114,6 +171,11 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
             print(x)
         for y in item.schedule:
             print(y)
+
+
+    for item in section_list:
+        print (item.section_id, item.section_schedule)
+
     for item in offering_list:
         if item.timeslot1_id == 0:
             print("unassigned offering")
