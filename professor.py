@@ -1,4 +1,4 @@
-from schedule import Schedule
+
 
 class Professor:
 

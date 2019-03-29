@@ -6,7 +6,7 @@ def initialize(faculty_list, offering_list, timeslot_list):
 # Assign offerings to faculty
     for item in offering_list:
         boolean = False
-        min = 0
+        
         while not boolean:
             print("assigning offerings to faculty")
             rand = random.randint(0, len(faculty_list)-1)

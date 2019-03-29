@@ -4,7 +4,7 @@ from course import Course
 from offering import Offering
 from timeslot import Timeslot
 from generalcourse import GeneralCourse
-from schedule import Schedule
+
 
 # Import Functions from Loading
 from loading import load_course_list
