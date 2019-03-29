@@ -35,7 +35,6 @@ def initialize(faculty_list, offering_list, timeslot_list):
         while not boolean:
             rand = random.randint(0, len(timeslot_list) - 2)
             for item2 in faculty_list:
-                #this is the line i changed
                 if item.offering_id in item2.assigned_offerings and timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time) not in item2.schedule:
                     if item.course_type == timeslot_list[rand].room_type and item.max_students == timeslot_list[rand].room_capacity and timeslot_list[rand].offering_id == "":
                         if item.units == 1:
@@ -98,19 +97,23 @@ def initialize(faculty_list, offering_list, timeslot_list):
                                 item2.schedule.append(timeslot_list[rand + 1].class_day + str(timeslot_list[rand + 1].begin_time))
 
                         print("test")
-                        boolean = True
+                        if item.timeslot1_id == 0:
+                            boolean = False
+                        else:
+                            boolean = True
                     else:
                         boolean = False
 
-    for item in offering_list:
-        if item.timeslot1_id == 0:
-            print("fuck")
+
     for item in faculty_list:
         print(item.first_name, item.last_name)
         for x in item.assigned_offerings:
             print(x)
         for y in item.schedule:
             print(y)
+    for item in offering_list:
+        if item.timeslot1_id == 0:
+            print("fuck")
     # Checks for Faculty Schedule
     for test in offering_list:
         print(test.offering_id, test.course_code, test.timeslot1_id, test.timeslot2_id, test.section, test.professor_id, test.room_id)
