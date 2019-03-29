@@ -4,6 +4,7 @@ from course import Course
 from offering import Offering
 from timeslot import Timeslot
 from generalcourse import GeneralCourse
+from section import Section
 
 # Import modules
 import pymysql
@@ -14,6 +15,7 @@ faculty_list = []
 offering_list = []
 timeslot_list = []
 general_course_list = []
+section_list = []
 
 
 def load_course_list():
@@ -189,4 +191,29 @@ def load_general_course_list():
     db.close()
     return general_course_list
 
+
+def load_section_list():
+    # Open database connection
+    db = pymysql.connect("localhost", "root", "root", "mysql")
+    # prepare a cursor object using cursor() method
+    cursor = db.cursor()
+
+    # Prepare SQL query to INSERT a record into the database.
+    sql = "SELECT DISTINCT(offering.section) FROM timetabling.offering  INNER JOIN timetabling.course ON course.course_id = offering.course_id  where offering.term = 2 and start_year = 2015 and college_id = 2 and course_code != 'LBYECON' "
+    try:
+        # Execute the SQL command
+        cursor.execute(sql)
+        # Fetch all the rows in a list of lists.
+        results = cursor.fetchall()
+        for row in results:
+            section_id = row[0]
+
+            section = Section(section_id)
+            section_list.append(section)
+    except:
+        print("Error: unable to fetch data")
+
+    # disconnect from server
+    db.close()
+    return section_list
 

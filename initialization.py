@@ -1,12 +1,12 @@
 import random
 
 
-def initialize(faculty_list, offering_list, timeslot_list):
+def initialize(faculty_list, offering_list, timeslot_list, section_list):
     sections = []
 # Assign offerings to faculty
     for item in offering_list:
         boolean = False
-        
+
         while not boolean:
             print("assigning offerings to faculty")
             rand = random.randint(0, len(faculty_list)-1)
@@ -36,7 +36,9 @@ def initialize(faculty_list, offering_list, timeslot_list):
         while not boolean:
             rand = random.randint(0, len(timeslot_list) - 2)
             for item2 in faculty_list:
+                #Checks if offering conflicts with professor's schedule
                 if item.offering_id in item2.assigned_offerings and timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time) not in item2.schedule:
+                    #Checks if room matches offering's requirements and that the timeslot isn't already taken
                     if item.course_type == timeslot_list[rand].room_type and item.max_students == timeslot_list[rand].room_capacity and timeslot_list[rand].offering_id == "":
                         if item.units == 1:
                             timeslot_list[rand].offering_id = item.offering_id
@@ -114,68 +116,7 @@ def initialize(faculty_list, offering_list, timeslot_list):
             print(y)
     for item in offering_list:
         if item.timeslot1_id == 0:
-            print("fuck")
+            print("unassigned offering")
     # Checks for Faculty Schedule
     for test in offering_list:
         print(test.offering_id, test.course_code, test.timeslot1_id, test.timeslot2_id, test.section, test.professor_id, test.room_id)
-    ''' 
-        for item in faculty_list:
-            for x in item.assigned_offerings:
-                rand = random.randint(0, len(timeslot_list) - 1)
-                for item2 in offering_list:
-                    if x == item2.offering_id:
-    '''
-
-
-    '''
-    
-# Checks for offerings that weren't assigned properly
-    for item in offering_list:
-        if item.timeslot1_id == 0:
-            print("fuck")
-    print("-------------------------------")
-    for item in offering_list:
-        if item.timeslot1_id == 0:
-            rand = random.randint(0, len(timeslot_list) - 1)
-            if item.course_type == timeslot_list[rand].room_type and item.max_students == timeslot_list[rand].room_capacity and timeslot_list[rand].offering_id == "":
-                if timeslot_list[rand].class_day == 'M' and timeslot_list[rand + 1].offering_id == "":
-                    timeslot_list[rand].offering_id = item.offering_id
-                    timeslot_list[rand + 1].offering_id = item.offering_id
-                    item.timeslot1_id = timeslot_list[rand].timeslot_id
-                    item.timeslot2_id = timeslot_list[rand + 1].timeslot_id
-                    item.room_id = timeslot_list[rand].room_code
-
-                elif timeslot_list[rand].class_day == 'W' and timeslot_list[rand - 1].offering_id == "":
-                    timeslot_list[rand].offering_id = item.offering_id
-                    timeslot_list[rand - 1].offering_id = item.offering_id
-                    item.timeslot1_id = timeslot_list[rand - 1].timeslot_id
-                    item.timeslot2_id = timeslot_list[rand].timeslot_id
-                    item.room_id = timeslot_list[rand].room_code
-
-                elif timeslot_list[rand].class_day == 'T' and timeslot_list[rand + 1].offering_id == "":
-                    timeslot_list[rand].offering_id = item.offering_id
-                    timeslot_list[rand + 1].offering_id = item.offering_id
-                    item.timeslot1_id = timeslot_list[rand].timeslot_id
-                    item.timeslot2_id = timeslot_list[rand + 1].timeslot_id
-                    item.room_id = timeslot_list[rand].room_code
-
-                elif timeslot_list[rand].class_day == 'H' and timeslot_list[rand - 1].offering_id == "":
-                    timeslot_list[rand].offering_id = item.offering_id
-                    timeslot_list[rand - 1].offering_id = item.offering_id
-                    item.timeslot1_id = timeslot_list[rand - 1].timeslot_id
-                    item.timeslot2_id = timeslot_list[rand].timeslot_id
-                    item.room_id = timeslot_list[rand].room_code
-
-                elif timeslot_list[rand].class_day == 'F' and timeslot_list[rand + 1].offering_id == "":
-                    timeslot_list[rand].offering_id = item.offering_id
-                    timeslot_list[rand + 1].offering_id = item.offering_id
-                    item.timeslot1_id = timeslot_list[rand].timeslot_id
-                    item.timeslot2_id = timeslot_list[rand + 1].timeslot_id
-                    item.room_id = timeslot_list[rand].room_code
-
-    for item in offering_list:
-        if item.timeslot1_id == 0:
-            print("fuck")
-    '''
-    #for item2 in faculty_list:
-    #   if item.offering_id in item2.assigned_offerings and timeslot_list[rand].class_day + str(timeslot_list[rand].begin_time) not in item2.schedule:

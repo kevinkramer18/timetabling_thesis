@@ -16,3 +16,20 @@ def fitness_function_1 (faculty_list):
 
     return score
 
+
+
+
+
+
+def fitness_function_3 (faculty_list):
+    aViolations = 0
+    score = 0
+
+    for item in faculty_list:
+        if len(item.preferred_courses) != 0:
+            for x in item.preferred_courses:
+                if x not in item.assigned_courses:
+                    aViolations += 1
+    score = aViolations
+
+    return score
