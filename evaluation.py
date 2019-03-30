@@ -36,9 +36,12 @@ def fitness_function_3 (faculty_list):
 
 
 
-def section_checking(timeslot, section_list):
+def section_checking(timeslot, section, section_list):
+    boolean = True
     for item in section_list:
-        if timeslot not in item.section_schedule:
-            return True
-        else:
-            return False
+        if section == item.section_id:
+            for x in item.section_schedule:
+                if timeslot == x:
+                    boolean = False
+
+    return boolean
