@@ -74,7 +74,8 @@ print("\n")
 
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
-population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
-population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
+
+for x in range(10):
+    population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
 
 print(len(population))
