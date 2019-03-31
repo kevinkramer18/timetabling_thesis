@@ -26,7 +26,8 @@ offering_list = copy.deepcopy(list(load_offering_list()))
 timeslot_list = copy.deepcopy(list(load_timeslot_list()))
 general_course_list = copy.deepcopy(list(load_general_course_list()))
 section_list = copy.deepcopy(list(load_section_list()))
-timetable_list = []
+
+population = []
 
 
 # Print Test of Loading Functions
@@ -73,7 +74,7 @@ print("\n")
 
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
-timetable_list.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
-timetable_list.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
+population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
+population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
 
-print(len(timetable_list))
+print(len(population))
