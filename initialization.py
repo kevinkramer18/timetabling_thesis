@@ -1,14 +1,15 @@
 import random
+import copy
 from evaluation import section_checking
 from timetable import Timetable
 
 def initialize(faculty_list, offering_list, timeslot_list, section_list):
 
 # Transfer to local variables
-    ifaculty_list = faculty_list
-    ioffering_list = offering_list
-    itimeslot_list = timeslot_list
-    isection_list = section_list
+    ifaculty_list = copy.deepcopy(faculty_list)
+    ioffering_list = copy.deepcopy(offering_list)
+    itimeslot_list = copy.deepcopy(timeslot_list)
+    isection_list = copy.deepcopy(section_list)
     sections = []
 # Assign offerings to faculty
 

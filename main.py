@@ -17,15 +17,15 @@ from loading import load_section_list
 
 # Import Functions from Initialization
 from initialization import initialize
-
+import copy
 
 # List declarations
-course_list = list(load_course_list())
-faculty_list = list(load_faculty_list())
-offering_list = list(load_offering_list())
-timeslot_list = list(load_timeslot_list())
-general_course_list = list(load_general_course_list())
-section_list = list(load_section_list())
+course_list = copy.deepcopy(list(load_course_list()))
+faculty_list = copy.deepcopy(list(load_faculty_list()))
+offering_list = copy.deepcopy(list(load_offering_list()))
+timeslot_list = copy.deepcopy(list(load_timeslot_list()))
+general_course_list = copy.deepcopy(list(load_general_course_list()))
+section_list = copy.deepcopy(list(load_section_list()))
 timetable_list = []
 
 
@@ -73,6 +73,7 @@ print("\n")
 
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
-timetable_list.append(initialize(faculty_list, offering_list, timeslot_list, section_list))
+timetable_list.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
+timetable_list.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
 
 print(len(timetable_list))
