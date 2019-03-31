@@ -73,4 +73,6 @@ print("\n")
 
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
-initialize(faculty_list, offering_list, timeslot_list, section_list)
+timetable_list.append(initialize(faculty_list, offering_list, timeslot_list, section_list))
+
+print(len(timetable_list))

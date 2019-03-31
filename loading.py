@@ -9,13 +9,13 @@ from section import Section
 # Import modules
 import pymysql
 
-# Declaring variables
-course_list = []
-faculty_list = []
-offering_list = []
-timeslot_list = []
-general_course_list = []
-section_list = []
+# Declaring variables and added l's to see if changing the variables works
+lcourse_list = []
+lfaculty_list = []
+loffering_list = []
+ltimeslot_list = []
+lgeneral_course_list = []
+lsection_list = []
 
 
 def load_course_list():
@@ -40,13 +40,13 @@ def load_course_list():
             course_type_value = row[5]
 
             course = Course(course_id_value, college_id_value, dept_id_value, course_code_value, units_value, course_type_value)
-            course_list.append(course)
+            lcourse_list.append(course)
     except:
         print("Error: unable to fetch data")
 
     # disconnect from server
     db.close()
-    return course_list
+    return lcourse_list
 
 
 
@@ -80,13 +80,13 @@ def load_faculty_list():
             if cpref3 is not None:
                 professor.preferred_courses.append(cpref3)
 
-            faculty_list.append(professor)
+            lfaculty_list.append(professor)
     except:
         print("Error: unable to fetch data")
 
     # disconnect from server
     db.close()
-    return faculty_list
+    return lfaculty_list
 
 
 
@@ -113,13 +113,13 @@ def load_offering_list():
             course_type_value = row[6]
 
             offering = Offering(offering_id_value,section_value, course_id_value,course_code_value, units_value, max_students_value, course_type_value)
-            offering_list.append(offering)
+            loffering_list.append(offering)
     except:
         print("Error: unable to fetch data")
 
     # disconnect from server
     db.close()
-    return offering_list
+    return loffering_list
 
 
 
@@ -147,13 +147,13 @@ def load_timeslot_list():
             room_capacity_value = row[7]
 
             timeslot = Timeslot(timeslots_id_value,room_id_value,class_day_value, begin_time_value, end_time_value, room_type_value, room_code_value, room_capacity_value )
-            timeslot_list.append(timeslot)
+            ltimeslot_list.append(timeslot)
     except:
         print("Error: unable to fetch data")
 
     # disconnect from server
     db.close()
-    return timeslot_list
+    return ltimeslot_list
 
 
 def load_general_course_list():
@@ -183,13 +183,13 @@ def load_general_course_list():
             day2_value = row[10]
 
             general_course = GeneralCourse(course_code_value, section_value, faculty_name_value, room_value, start_year_value, end_year_value,term_value, start_time_value, end_time_value, day1_value, day2_value )
-            general_course_list.append(general_course)
+            lgeneral_course_list.append(general_course)
     except:
         print("Error: unable to fetch data")
 
     # disconnect from server
     db.close()
-    return general_course_list
+    return lgeneral_course_list
 
 
 def load_section_list():
@@ -209,11 +209,11 @@ def load_section_list():
             section_id = row[0]
 
             section = Section(section_id)
-            section_list.append(section)
+            lsection_list.append(section)
     except:
         print("Error: unable to fetch data")
 
     # disconnect from server
     db.close()
-    return section_list
+    return lsection_list
 
