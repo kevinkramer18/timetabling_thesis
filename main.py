@@ -5,6 +5,7 @@ from offering import Offering
 from timeslot import Timeslot
 from generalcourse import GeneralCourse
 from section import Section
+from timetable import Timetable
 
 # Import Functions from Loading
 from loading import load_course_list
@@ -13,6 +14,7 @@ from loading import load_offering_list
 from loading import load_timeslot_list
 from loading import load_general_course_list
 from loading import load_section_list
+
 # Import Functions from Initialization
 from initialization import initialize
 
@@ -24,6 +26,7 @@ offering_list = list(load_offering_list())
 timeslot_list = list(load_timeslot_list())
 general_course_list = list(load_general_course_list())
 section_list = list(load_section_list())
+timetable_list = []
 
 
 # Print Test of Loading Functions

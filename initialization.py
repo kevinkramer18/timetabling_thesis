@@ -182,3 +182,5 @@ def initialize(faculty_list, offering_list, timeslot_list, section_list):
     # Checks for Faculty Schedule
     for test in offering_list:
         print(test.offering_id, test.course_code, test.timeslot1_id, test.timeslot2_id, test.section, test.professor_id, test.room_id)
+
+    
