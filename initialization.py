@@ -118,7 +118,7 @@ def initialize(faculty_list, offering_list, timeslot_list):
 
 
 
-                            elif itimeslot_list[rand].class_day == 'F' and itimeslot_list[rand + 1].offering_id == "" and itimeslot_list[rand].begin_time != 1245:
+                            elif itimeslot_list[rand].class_day == 'F' and itimeslot_list[rand + 1].offering_id == "" and itimeslot_list[rand].begin_time != 1245 and itimeslot_list[rand+1].class_day + '-' + str(itimeslot_list[rand+1].begin_time) not in item2.schedule:
                                 itimeslot_list[rand].offering_id = item.offering_id
                                 itimeslot_list[rand + 1].offering_id = item.offering_id
                                 item.timeslot1_id = itimeslot_list[rand].timeslot_id
