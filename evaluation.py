@@ -1,8 +1,12 @@
 import copy
+
 def fitness_function_1 (faculty_list):
     mViolations = 0
     aViolations = 0
     score = 0
+    mw_time_list = []
+    th_time_list = []
+    f_time_list = []
 
     for item in faculty_list:
         mViolations += len(item.preferred_courses)
@@ -13,11 +17,127 @@ def fitness_function_1 (faculty_list):
                 if x not in item.assigned_offerings:
                     aViolations += 1
 
+    # Max long breaks between classes
+    for item in faculty_list:
+        if len(item.schedule) >= 2:
+            for item2 in item.schedule:
+                temp_list = copy.deepcopy(item2.split('-'))
+                if temp_list[0] == 'M':
+                    mw_time_list.append(int(temp_list[1]))
+                elif temp_list[0] == 'T':
+                    th_time_list.append(int(temp_list[1]))
+                elif temp_list[0] == 'F':
+                    f_time_list.append(int(temp_list[1]))
+
+        if len(mw_time_list) == 2:
+            mViolations += 1
+        elif len(mw_time_list) >= 3:
+            mViolations += 2
+        elif len(th_time_list) == 2:
+            mViolations += 1
+        elif len(th_time_list) >= 3:
+            mViolations += 2
+        elif len(f_time_list) == 2:
+            mViolations += 1
+        elif len(f_time_list) >= 3:
+            mViolations += 2
+
+        if len(mw_time_list) >= 2:
+            mw_time_list.sort()
+            for y in range(len(mw_time_list)-1):
+                if (mw_time_list[y] + 435) <  mw_time_list[y+1]:
+                    print(mw_time_list[y])
+                    print(mw_time_list[y+1])
+                    aViolations += 1
+
+        elif len(th_time_list) >= 2:
+            th_time_list.sort()
+            for y in range(len(th_time_list)-1):
+                if (th_time_list[y] + 435) <  th_time_list[y+1]:
+                    print(th_time_list[y])
+                    print(th_time_list[y + 1])
+                    aViolations += 1
+
+        elif len(f_time_list) >= 2:
+            f_time_list.sort()
+            for y in range(len(f_time_list)-1):
+                if (f_time_list[y] + 435) <  f_time_list[y+1]:
+                    print(f_time_list[y])
+                    print(f_time_list[y + 1])
+                    aViolations += 1
+
+
+    print(aViolations, mViolations)
 
     score = aViolations/mViolations
-
     return score
 
+
+
+def fitness_function_2(faculty_list):
+    mViolations = 0
+    aViolations = 0
+
+    pfc_percentage = 0.6
+    lb_percentage =  0.4
+
+    pfc_a_count = 0
+    lb_a_count = 0
+
+    score = 0
+
+    mw_time_list = []
+    th_time_list = []
+    f_time_list = []
+
+    for item in faculty_list:
+        if len(item.preferred_courses) != 0:
+            for x in item.preferred_courses:
+                if x not in item.assigned_offerings:
+                    pfc_a_count += 1
+
+
+    # Breaks in between classes
+
+    for item in faculty_list:
+        if len(item.schedule) >= 2:
+            for item2 in item.schedule:
+                temp_list = copy.deepcopy(item2.split('-'))
+                if temp_list[0] == 'M':
+                    mw_time_list.append(int(temp_list[1]))
+                elif temp_list[0] =='T':
+                    th_time_list.append(int(temp_list[1]))
+                elif temp_list[0] == 'F':
+                    f_time_list.append(int(temp_list[1]))
+
+        if len(mw_time_list) >= 2:
+            mw_time_list.sort()
+            for y in range(len(mw_time_list)-1):
+                if (mw_time_list[y] + 435) <  mw_time_list[y+1]:
+                    print(mw_time_list[y])
+                    print(mw_time_list[y+1])
+                    aViolations += 1
+
+        elif len(th_time_list) >= 2:
+            th_time_list.sort()
+            for y in range(len(th_time_list)-1):
+                if (th_time_list[y] + 435) <  th_time_list[y+1]:
+                    print(th_time_list[y])
+                    print(th_time_list[y + 1])
+                    aViolations += 1
+
+        elif len(f_time_list) >= 2:
+            f_time_list.sort()
+            for y in range(len(f_time_list)-1):
+                if (f_time_list[y] + 435) <  f_time_list[y+1]:
+                    print(f_time_list[y])
+                    print(f_time_list[y + 1])
+                    aViolations += 1
+
+    print(aViolations,'*', lb_percentage, '   ', pfc_a_count, '*', pfc_percentage)
+    score = (aViolations * lb_percentage)+(pfc_a_count * pfc_percentage)
+
+    return score
 
 
 
@@ -29,10 +149,13 @@ def fitness_function_3 (faculty_list):
 
     temp_list = []
     day_list = []
-    time_list = []
-    temp_sum = 0
 
+    mw_time_list = []
+    th_time_list = []
+    f_time_list = []
 
+    temp = 0
+    temp2 = 0
 
     for item in faculty_list:
         if len(item.preferred_courses) != 0:
@@ -40,22 +163,48 @@ def fitness_function_3 (faculty_list):
                 if x not in item.assigned_offerings:
                     aViolations += 1
 
+
+    # Breaks in between classes
+
     for item in faculty_list:
         if len(item.schedule) >= 2:
             for item2 in item.schedule:
                 temp_list = copy.deepcopy(item2.split('-'))
-                day_list.append(str(temp_list[0]))
-                time_list.append(int(temp_list[1]))
-          #  for x in range(len(day_list)):
-          #      day
+                if temp_list[0] == 'M':
+                    mw_time_list.append(int(temp_list[1]))
+                elif temp_list[0] =='T':
+                    th_time_list.append(int(temp_list[1]))
+                elif temp_list[0] == 'F':
+                    f_time_list.append(int(temp_list[1]))
 
+        if len(mw_time_list) >= 2:
+            mw_time_list.sort()
+            for y in range(len(mw_time_list)-1):
+                if (mw_time_list[y] + 435) <  mw_time_list[y+1]:
+                    print(mw_time_list[y])
+                    print(mw_time_list[y+1])
+                    aViolations += 1
 
+        elif len(th_time_list) >= 2:
+            th_time_list.sort()
+            for y in range(len(th_time_list)-1):
+                if (th_time_list[y] + 435) <  th_time_list[y+1]:
+                    print(th_time_list[y])
+                    print(th_time_list[y + 1])
+                    aViolations += 1
+
+        elif len(f_time_list) >= 2:
+            f_time_list.sort()
+            for y in range(len(f_time_list)-1):
+                if (f_time_list[y] + 435) <  f_time_list[y+1]:
+                    print(f_time_list[y])
+                    print(f_time_list[y + 1])
+                    aViolations += 1
 
 
 
 
     score = aViolations
-
     return score
 
 

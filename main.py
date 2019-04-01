@@ -14,9 +14,10 @@ from loading import load_offering_list
 from loading import load_timeslot_list
 from loading import load_general_course_list
 from loading import load_section_list
+
 from evaluation import fitness_function_1
 from evaluation import fitness_function_3
-
+from evaluation import fitness_function_2
 # Import Functions from Initialization
 from initialization import initialize
 import copy
@@ -103,8 +104,10 @@ print(len(population))
 
 for x in population:
     x.fitness1 = fitness_function_1(x.faculty)
+    x.fitness2 = fitness_function_2(x.faculty)
     x.fitness3 = fitness_function_3(x.faculty)
     print("Fitness Score 1: ", x.fitness1)
+    print("Fitness Score 2: ", x.fitness2)
     print("Fitness Score 3: ",  x.fitness3)
     print("-------------")
 
