@@ -14,6 +14,8 @@ from loading import load_offering_list
 from loading import load_timeslot_list
 from loading import load_general_course_list
 from loading import load_section_list
+from evaluation import fitness_function_1
+from evaluation import fitness_function_3
 
 # Import Functions from Initialization
 from initialization import initialize
@@ -76,6 +78,14 @@ print("\n")
 # Assigns Faculty to Offerings and Offerings to Timeslots
 
 for x in range(10):
-    population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list), copy.deepcopy(section_list)))
+    population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list)))
 
 print(len(population))
+
+
+for x in population:
+    x.fitness1 = fitness_function_1(x.faculty)
+    x.fitness3 = fitness_function_3(x.faculty)
+    print(x.fitness1)
+    print(x.fitness3)
+
