@@ -80,7 +80,9 @@ def section_checking(timeslot, section, section_list):
 
 def faculty_checking(faculty, nTimeslot):
     temp_list = []
+    print(nTimeslot)
     temp_list = copy.deepcopy(nTimeslot.split('-'))
+    print(temp_list)
     temp_day = str(temp_list[0])
     temp_slot = int(temp_list[1])
     temp_slot2 = 0

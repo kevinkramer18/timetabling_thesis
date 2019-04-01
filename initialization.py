@@ -1,6 +1,7 @@
 import random
 import copy
 from evaluation import section_checking
+from evaluation import faculty_checking
 from timetable import Timetable
 
 def initialize(faculty_list, offering_list, timeslot_list):
@@ -45,7 +46,7 @@ def initialize(faculty_list, offering_list, timeslot_list):
             rand = random.randint(0, len(timeslot_list) - 2)
             for item2 in ifaculty_list:
                 #Checks if offering conflicts with professor's schedule and section schedule
-                if item.offering_id in item2.assigned_offerings and itimeslot_list[rand].class_day + str(itimeslot_list[rand].begin_time) not in item2.schedule:
+                if item.offering_id in item2.assigned_offerings and itimeslot_list[rand].class_day + '-' + str(itimeslot_list[rand].begin_time) not in item2.schedule and faculty_checking(item2, itimeslot_list[rand].class_day + '-' + str(itimeslot_list[rand].begin_time)):
                     #Checks if room matches offering's requirements and that the timeslot isn't already taken
                     if item.course_type == itimeslot_list[rand].room_type and item.max_students == itimeslot_list[rand].room_capacity and itimeslot_list[rand].offering_id == "":
                         if item.units == 1:
