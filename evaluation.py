@@ -1,5 +1,5 @@
 import copy
-def fitness_function_1 (faculty_list, offering_list):
+def fitness_function_1 (faculty_list):
     mViolations = 0
     aViolations = 0
     score = 0
@@ -49,6 +49,11 @@ def fitness_function_3 (faculty_list):
                 time_list.append(int(temp_list[1]))
           #  for x in range(len(day_list)):
           #      day
+
+
+
+
+
 
     score = aViolations
 

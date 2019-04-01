@@ -29,8 +29,26 @@ timeslot_list = copy.deepcopy(list(load_timeslot_list()))
 general_course_list = copy.deepcopy(list(load_general_course_list()))
 section_list = copy.deepcopy(list(load_section_list()))
 
+present_faculty_courses = []
+pfc_count = 0
 population = []
 
+# Removing preferred courses that aren't present in the current set of offerings
+for item in offering_list:
+    present_faculty_courses.append(item.course_id)
+present_faculty_courses = copy.deepcopy(list(set(present_faculty_courses)))
+present_faculty_courses.sort()
+temp_faculty_course = []
+print("----------------------")
+print(present_faculty_courses)
+print("----------------------")
+
+for item in faculty_list:
+    print(item.first_name, item.last_name)
+    item.preferred_courses = copy.deepcopy([x for x in item.preferred_courses if x in present_faculty_courses])
+
+
+print("--------------------")
 
 # Print Test of Loading Functions
 unit = 0
