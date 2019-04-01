@@ -104,6 +104,7 @@ print(len(population))
 for x in population:
     x.fitness1 = fitness_function_1(x.faculty)
     x.fitness3 = fitness_function_3(x.faculty)
-    print(x.fitness1)
-    print(x.fitness3)
+    print("Fitness Score 1: ", x.fitness1)
+    print("Fitness Score 3: ",  x.fitness3)
+    print("-------------")
 

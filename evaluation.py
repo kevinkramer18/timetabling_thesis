@@ -12,9 +12,8 @@ def fitness_function_1 (faculty_list):
             for x in item.preferred_courses:
                 if x not in item.assigned_offerings:
                     aViolations += 1
-    print("--------------------------")
-    print(str(aViolations) + "/" + str(mViolations))
-    print("--------------------------")
+
+
     score = aViolations/mViolations
 
     return score
