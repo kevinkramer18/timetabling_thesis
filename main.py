@@ -6,6 +6,8 @@ from timeslot import Timeslot
 from generalcourse import GeneralCourse
 from section import Section
 from timetable import Timetable
+from output import output_faculty_csv
+from output import output_timetable_csv
 
 # Import Functions from Loading
 from loading import load_course_list
@@ -96,7 +98,7 @@ print("\n")
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
 
-for x in range(100):
+for x in range(10):
     population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list)))
 
 print(len(population))
@@ -148,3 +150,6 @@ print("***Best of the Best - Fitness 3***")
 print("Fitness Score 1: ", timetable3.fitness1)
 print("Fitness Score 2: ", timetable3.fitness2)
 print("Fitness Score 3: ", timetable3.fitness3)
+
+output_faculty_csv(timetable1)
+output_faculty_csv(timetable1)
