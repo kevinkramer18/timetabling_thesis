@@ -96,7 +96,7 @@ print("\n")
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
 
-for x in range(10):
+for x in range(100):
     population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list)))
 
 print(len(population))
@@ -108,6 +108,43 @@ for x in population:
     x.fitness3 = fitness_function_3(x.faculty)
     print("Fitness Score 1: ", x.fitness1)
     print("Fitness Score 2: ", x.fitness2)
-    print("Fitness Score 3: ",  x.fitness3)
+    print("Fitness Score 3: ", x.fitness3)
     print("-------------")
 
+
+temp_fit = 50
+
+timetable1 = Timetable
+timetable2 = Timetable
+timetable3 = Timetable
+
+for x in population:
+    if x.fitness1 < temp_fit:
+        temp_fit = x.fitness1
+        timetable1 = x
+temp_fit = 50
+for x in population:
+    if x.fitness2 < temp_fit:
+        temp_fit = x.fitness2
+        timetable2 = x
+temp_fit = 50
+for x in population:
+    if x.fitness3 < temp_fit:
+        temp_fit = x.fitness3
+        timetable3 = x
+
+print("***Best of the Best - Fitness 1***")
+print("Fitness Score 1: ", timetable1.fitness1)
+print("Fitness Score 2: ", timetable1.fitness2)
+print("Fitness Score 3: ", timetable1.fitness3)
+
+
+print("***Best of the Best - Fitness 2***")
+print("Fitness Score 1: ", timetable2.fitness1)
+print("Fitness Score 2: ", timetable2.fitness2)
+print("Fitness Score 3: ", timetable2.fitness3)
+
+print("***Best of the Best - Fitness 3***")
+print("Fitness Score 1: ", timetable3.fitness1)
+print("Fitness Score 2: ", timetable3.fitness2)
+print("Fitness Score 3: ", timetable3.fitness3)

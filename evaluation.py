@@ -46,24 +46,24 @@ def fitness_function_1 (faculty_list):
             mw_time_list.sort()
             for y in range(len(mw_time_list)-1):
                 if (mw_time_list[y] + 435) <  mw_time_list[y+1]:
-                    print(mw_time_list[y])
-                    print(mw_time_list[y+1])
+                   # print(mw_time_list[y])
+                   # print(mw_time_list[y+1])
                     aViolations += 1
 
         elif len(th_time_list) >= 2:
             th_time_list.sort()
             for y in range(len(th_time_list)-1):
                 if (th_time_list[y] + 435) <  th_time_list[y+1]:
-                    print(th_time_list[y])
-                    print(th_time_list[y + 1])
+                   # print(th_time_list[y])
+                   # print(th_time_list[y + 1])
                     aViolations += 1
 
         elif len(f_time_list) >= 2:
             f_time_list.sort()
             for y in range(len(f_time_list)-1):
                 if (f_time_list[y] + 435) <  f_time_list[y+1]:
-                    print(f_time_list[y])
-                    print(f_time_list[y + 1])
+                   # print(f_time_list[y])
+                   # print(f_time_list[y + 1])
                     aViolations += 1
 
 
@@ -114,24 +114,24 @@ def fitness_function_2(faculty_list):
             mw_time_list.sort()
             for y in range(len(mw_time_list)-1):
                 if (mw_time_list[y] + 435) <  mw_time_list[y+1]:
-                    print(mw_time_list[y])
-                    print(mw_time_list[y+1])
+                    #print(mw_time_list[y])
+                    #print(mw_time_list[y+1])
                     aViolations += 1
 
         elif len(th_time_list) >= 2:
             th_time_list.sort()
             for y in range(len(th_time_list)-1):
                 if (th_time_list[y] + 435) <  th_time_list[y+1]:
-                    print(th_time_list[y])
-                    print(th_time_list[y + 1])
+                    #print(th_time_list[y])
+                    #print(th_time_list[y + 1])
                     aViolations += 1
 
         elif len(f_time_list) >= 2:
             f_time_list.sort()
             for y in range(len(f_time_list)-1):
                 if (f_time_list[y] + 435) <  f_time_list[y+1]:
-                    print(f_time_list[y])
-                    print(f_time_list[y + 1])
+                   # print(f_time_list[y])
+                   # print(f_time_list[y + 1])
                     aViolations += 1
 
     print(aViolations,'*', lb_percentage, '   ', pfc_a_count, '*', pfc_percentage)
@@ -181,24 +181,24 @@ def fitness_function_3 (faculty_list):
             mw_time_list.sort()
             for y in range(len(mw_time_list)-1):
                 if (mw_time_list[y] + 435) <  mw_time_list[y+1]:
-                    print(mw_time_list[y])
-                    print(mw_time_list[y+1])
+                    #print(mw_time_list[y])
+                    #print(mw_time_list[y+1])
                     aViolations += 1
 
         elif len(th_time_list) >= 2:
             th_time_list.sort()
             for y in range(len(th_time_list)-1):
                 if (th_time_list[y] + 435) <  th_time_list[y+1]:
-                    print(th_time_list[y])
-                    print(th_time_list[y + 1])
+                    #print(th_time_list[y])
+                    #print(th_time_list[y + 1])
                     aViolations += 1
 
         elif len(f_time_list) >= 2:
             f_time_list.sort()
             for y in range(len(f_time_list)-1):
                 if (f_time_list[y] + 435) <  f_time_list[y+1]:
-                    print(f_time_list[y])
-                    print(f_time_list[y + 1])
+                   # print(f_time_list[y])
+                   # print(f_time_list[y + 1])
                     aViolations += 1
 
 
