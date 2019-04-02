@@ -6,8 +6,6 @@ from timeslot import Timeslot
 from generalcourse import GeneralCourse
 from section import Section
 from timetable import Timetable
-from output import output_faculty_csv
-from output import output_timetable_csv
 
 # Import Functions from Loading
 from loading import load_course_list
@@ -20,6 +18,11 @@ from loading import load_section_list
 from evaluation import fitness_function_1
 from evaluation import fitness_function_3
 from evaluation import fitness_function_2
+
+from output import output_faculty_csv
+from output import output_timetable_csv
+from output import output_timeslots_csv
+
 # Import Functions from Initialization
 from initialization import initialize
 import copy
@@ -152,4 +155,5 @@ print("Fitness Score 2: ", timetable3.fitness2)
 print("Fitness Score 3: ", timetable3.fitness3)
 
 output_faculty_csv(timetable1)
-output_faculty_csv(timetable1)
+output_timetable_csv(timetable1)
+output_timeslots_csv(timetable1)

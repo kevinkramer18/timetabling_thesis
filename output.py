@@ -13,12 +13,18 @@ def output_timetable_csv(timetable):
     with open('C:\\Users\\Kevin James T Kramer\\Documents\\School\\My Thesis\\Output CSVs\\timetable.csv', mode='w') as timetable_file:
         timetable_writer = csv.writer(timetable_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        timetable_writer.writerow([timetable.fitness1, timetable.fitness2, timetable.fitness3])
-
+        timetable_writer.writerow(['Fitness1: ',timetable.fitness1,'Fitness2: ', timetable.fitness2,'Fitness3: ', timetable.fitness3])
         for x in timetable.offerings:
-            timetable_writer.writer([x.offering_id, x.course_id, x.course_code, x.professor_id, x.room_id, x.timeslot1_id, x.timeslot2_id])
+            timetable_writer.writerow([x.offering_id, x.course_id, x.course_code, x.professor_id, x.room_id, x.timeslot1_id, x.timeslot2_id])
 
 
+def output_timeslots_csv(timetable):
+    with open('C:\\Users\\Kevin James T Kramer\\Documents\\School\\My Thesis\\Output CSVs\\timeslots.csv', mode='w') as timeslots_file:
+       timeslots_writer = csv.writer(timeslots_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+       for x in timetable.timeslots:
+           if x.offering_id != "":
+               timeslots_writer.writerow([x.timeslot_id, x.room_id, x.room_code, x.class_day, x.begin_time, x.end_time, x.offering_id])
 
 
 
