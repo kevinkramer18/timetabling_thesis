@@ -27,6 +27,10 @@ from output import output_timeslots_csv
 from initialization import initialize
 import copy
 
+# Import Functions from Selection
+from selection import  tournament_selection
+
+
 # List declarations
 course_list = copy.deepcopy(list(load_course_list()))
 faculty_list = copy.deepcopy(list(load_faculty_list()))
@@ -157,3 +161,16 @@ print("Fitness Score 3: ", timetable3.fitness3)
 output_faculty_csv(timetable1)
 output_timetable_csv(timetable1)
 output_timeslots_csv(timetable1)
+
+
+# Selection
+
+NumParentA = tournament_selection(population)
+print(NumParentA)
+
+NumParentB = NumParentA
+
+while NumParentB == NumParentA:
+    NumParentB = tournament_selection(population)
+
+print(NumParentB)
