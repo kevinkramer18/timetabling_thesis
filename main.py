@@ -30,6 +30,8 @@ import copy
 # Import Functions from Selection
 from selection import  tournament_selection
 
+# Import Functions from Crossover
+from crossover import crossover_process
 
 # List declarations
 course_list = copy.deepcopy(list(load_course_list()))
@@ -162,15 +164,29 @@ output_faculty_csv(timetable1)
 output_timetable_csv(timetable1)
 output_timeslots_csv(timetable1)
 
+#-----------------------------------------------------------------------------------------------------------------------
 
 # Selection
 
-NumParentA = tournament_selection(population)
-print(NumParentA)
+numParentA = tournament_selection(population)
+print(numParentA)
 
-NumParentB = NumParentA
+numParentB = numParentA
 
-while NumParentB == NumParentA:
-    NumParentB = tournament_selection(population)
+while numParentB == numParentA:
+    numParentB = tournament_selection(population)
 
-print(NumParentB)
+print(numParentB)
+
+if population[numParentA].fitness2 <= population[numParentB].fitness2:
+    superParent = copy.deepcopy(population[numParentA])
+    inferiorParent = copy.deepcopy((population[numParentB]))
+else:
+    superParent = copy.deepcopy(population[numParentB])
+    inferiorParent = copy.deepcopy((population[numParentA]))
+# Crossover
+
+
+emptyChild = Timetable(copy.deepcopy(faculty_list), copy.deepcopy(offering_list) , copy.deepcopy(timeslot_list))
+
+newChild = crossover_process(copy.deepcopy(superParent), copy.deepcopy(inferiorParent), copy.deepcopy(emptyChild))
