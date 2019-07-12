@@ -35,19 +35,24 @@ def crossover_process(topParent, bottomParent, child):
         ctimeslot1 = child.timeslots[next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == topParent.offerings[i].timeslot1_id)].offering_id
         ctimeslot2 = child.timeslots[next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == topParent.offerings[i].timeslot2_id)].offering_id
         print(next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == topParent.offerings[i].timeslot1_id))
+        ctimeslot1index = next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == topParent.offerings[i].timeslot1_id)
         print(next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == topParent.offerings[i].timeslot2_id))
+        ctimeslot2index = next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == topParent.offerings[i].timeslot2_id)
 
         if rand <= 60 and tpt1begin_time not in child.faculty[tpProfessorIndex].schedule and tpt2begin_time not in child.faculty[tpProfessorIndex].schedule and ctimeslot1 == ""  and ctimeslot2 == "" and (child.faculty[tpProfessorIndex].units + topParent.offerings[i].units) <= child.faculty[tpProfessorIndex].load :
             child.offerings[i].professor_id = topParent.offerings[i].professor_id
             child.offerings[i].room_id = topParent.offerings[i].room_id
-
             child.offerings[i].timeslot1_id = topParent.offerings[i].timeslot1_id
             child.offerings[i].timeslot2_id = topParent.offerings[i].timeslot2_id
             child.offerings[i].college_id = topParent.offerings[i].college_id
 
+            child.faculty[tpProfessorIndex].assigned_offerings.append(topParent.offerings[i].offering_id)
+            child.faculty[tpProfessorIndex].schedule.append(tpt1begin_time)
+            child.faculty[tpProfessorIndex].schedule.append(tpt2begin_time)
+            child.faculty[tpProfessorIndex].units += topParent.offerings[i].units
 
-
-
+            child.timeslots[ctimeslot1index].offering_id = topParent.offerings[i].offering_id
+            child.timeslots[ctimeslot2index].offering_id = topParent.offerings[i].offering_id
 
 
 
