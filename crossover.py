@@ -42,7 +42,7 @@ def crossover_process(topParent, bottomParent, child):
 
 
         #-----------------------------------------------------------------------BOTTOM PARENT-----------------------------------------------------------------------------------------
-
+        print("****************** Bottom Parent**********************")
         # Gives the professor's index from the bottomparent
         print(bottomParent.offerings[i].professor_id)
         # print(child.faculty[next(j for j, x in enumerate(child.faculty) if x.professor_id == bottomParent.offerings[i].professor_id)].professor_id)
@@ -59,6 +59,21 @@ def crossover_process(topParent, bottomParent, child):
         # print(str(bottomParent.timeslots[next(j for j, x in enumerate(bottomParent.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot1_id)].class_day) + '-' + str(bottomParent.timeslots[next(j for j, x in enumerate(bottomParent.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot1_id)].begin_time))
         btmt1begin_time = str(bottomParent.timeslots[next(j for j, x in enumerate(bottomParent.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot1_id)].class_day) + '-' + str(bottomParent.timeslots[next(j for j, x in enumerate(bottomParent.timeslots)if x.timeslot_id == bottomParent.offerings[ i].timeslot1_id)].begin_time)
         print(btmt1begin_time)
+
+        # btm2begin_time gives the begin_time from the second parent timeslot
+        print(next(j for j, x in enumerate(bottomParent.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot2_id))
+        # print(str(bottomParent.timeslots[next(j for j, x in enumerate(bottomParent.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot2_id)].class_day) + '-' + str(bottomParent.timeslots[next(j for j, x in enumerate(bottomParent.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot2_id)].begin_time))
+        btmt2begin_time = str(bottomParent.timeslots[next(j for j, x in enumerate(bottomParent.timeslots) if x.timeslot_id == bottomParent.offerings[ i].timeslot2_id)].class_day) + '-' + str( bottomParent.timeslots[next(j for j, x in enumerate(bottomParent.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot2_id)].begin_time)
+        print(btmt2begin_time)
+
+        # Returns whether the timeslot1 in child is occupied or not from topParent
+        print("*******************************")
+        cbtmtimeslot1 = child.timeslots[next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot1_id)].offering_id
+        cbtmtimeslot2 = child.timeslots[next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot2_id)].offering_id
+        print(next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot1_id))
+        cbtmtimeslot1index = next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot1_id)
+        print(next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot2_id))
+        cbtmtimeslot2index = next(j for j, x in enumerate(child.timeslots) if x.timeslot_id == bottomParent.offerings[i].timeslot2_id)
 
 
 
@@ -80,6 +95,20 @@ def crossover_process(topParent, bottomParent, child):
 
 
         elif rand >= 60 and (child.faculty[btmProfessorIndex].units + bottomParent.offerings[i].units) <= child.faculty[btmProfessorIndex].load :
+            if btmt1begin_time not in child.faculty[btmProfessorIndex].schedule and btmt2begin_time not in child.faculty[btmProfessorIndex].schedule and cbtmtimeslot1 == "" and cbtmtimeslot2 == "":
+                child.offerings[i].professor_id = bottomParent.offerings[i].professor_id
+                child.offerings[i].room_id = bottomParent.offerings[i].room_id
+                child.offerings[i].timeslot1_id = bottomParent.offerings[i].timeslot1_id
+                child.offerings[i].timeslot2_id = bottomParent.offerings[i].timeslot2_id
+                child.offerings[i].college_id = bottomParent.offerings[i].college_id
+
+                child.faculty[btmProfessorIndex].assigned_offerings.append(bottomParent.offerings[i].offering_id)
+                child.faculty[btmProfessorIndex].schedule.append(btmt1begin_time)
+                child.faculty[btmProfessorIndex].schedule.append(btmt2begin_time)
+                child.faculty[btmProfessorIndex].units += bottomParent.offerings[i].units
+
+                child.timeslots[cbtmtimeslot1index].offering_id = bottomParent.offerings[i].offering_id
+                child.timeslots[cbtmtimeslot2index].offering_id = bottomParent.offerings[i].offering_id
 
 
     return child
