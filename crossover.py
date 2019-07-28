@@ -157,7 +157,7 @@ def crossover_process(topParent, bottomParent, child):
 
 
 
-        elif randParent >= 60 and (child.faculty[btmProfessorIndex].units + bottomParent.offerings[i].units) <= child.faculty[btmProfessorIndex].load :
+        elif randParent >= 60 and (child.faculty[btmProfessorIndex].units + bottomParent.offerings[i].units) <= child.faculty[btmProfessorIndex].load:
             if btmt1begin_time not in child.faculty[btmProfessorIndex].schedule and btmt2begin_time not in child.faculty[btmProfessorIndex].schedule and cbtmtimeslot1 == "" and cbtmtimeslot2 == "":
                 child.offerings[i].professor_id = bottomParent.offerings[i].professor_id
                 child.offerings[i].room_id = bottomParent.offerings[i].room_id
@@ -231,7 +231,63 @@ def crossover_process(topParent, bottomParent, child):
                         break
 
         else:
-            #Randomly choose new faculty
+            while True:
+                rand_faculty = random.randint(0, len(child.faculty)-1)
+                if (child.faculty[rand_faculty].units + bottomParent.offerings[i].units) <= child.faculty[rand_faculty].load :
+
+                    while True:
+                        rand = random.randint(0, len(child.timeslots) - 2)
+
+                        if child.timeslots[rand].class_day == 'M' or child.timeslots[rand].class_day == 'T' and child.timeslots[rand].offering_id == '' and child.timeslots[rand + 1].offering_id == '' and child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time) not in child.faculty[rand_faculty].schedule:
+                            child.offerings[i].professor_id = child.faculty[rand_faculty].professor_id
+                            child.offerings[i].room_id = child.timeslots[rand].room_code
+                            child.offerings[i].timeslot1_id = child.timeslots[rand].timeslot_id
+                            child.offerings[i].timeslot2_id = child.timeslots[rand + 1].timeslot_id
+
+
+                            child.faculty[rand_faculty].assigned_offerings.append(child.offerings[i].offering_id)
+                            child.faculty[rand_faculty].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
+                            child.faculty[rand_faculty].schedule.append(child.timeslots[rand + 1].class_day + '-' + str(child.timeslots[rand + 1].begin_time))
+                            child.faculty[rand_faculty].units += child.offerings[i].units
+
+                            child.timeslots[rand].offering_id = child.offerings[i].offering_id
+                            child.timeslots[rand + 1].offering_id = child.offerings[i].offering_id
+
+                        elif  child.timeslots[rand].class_day == 'W' or child.timeslots[rand].class_day == 'H' and child.timeslots[rand].offering_id == '' and child.timeslots[rand - 1].offering_id == '' and child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time) not in child.faculty[rand_faculty].schedule:
+                            child.offerings[i].professor_id = child.faculty[rand_faculty].professor_id
+                            child.offerings[i].room_id = child.timeslots[rand].room_code
+                            child.offerings[i].timeslot1_id = child.timeslots[rand].timeslot_id
+                            child.offerings[i].timeslot2_id = child.timeslots[rand - 1].timeslot_id
+
+
+                            child.faculty[rand_faculty].assigned_offerings.append(child.offerings[i].offering_id)
+                            child.faculty[rand_faculty].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
+                            child.faculty[rand_faculty].schedule.append(child.timeslots[rand - 1].class_day + '-' + str(child.timeslots[rand - 1].begin_time))
+                            child.faculty[rand_faculty].units += child.offerings[i].units
+
+                            child.timeslots[rand].offering_id = child.offerings[i].offering_id
+                            child.timeslots[rand - 1].offering_id = child.offerings[i].offering_id
+
+                            break
+
+                        elif   child.timeslots[rand].class_day == 'F'  and child.timeslots[rand].offering_id == '' and child.timeslots[rand + 1].offering_id == '' and child.timeslots[rand].begin_time != 1245 and child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time)  not in child.faculty[rand_faculty].schedule:
+                            child.offerings[i].professor_id = child.faculty[rand_faculty].professor_id
+                            child.offerings[i].room_id = child.timeslots[rand].room_code
+                            child.offerings[i].timeslot1_id = child.timeslots[rand].timeslot_id
+                            child.offerings[i].timeslot2_id = child.timeslots[rand + 1].timeslot_id
+
+
+                            child.faculty[rand_faculty].assigned_offerings.append(child.offerings[i].offering_id)
+                            child.faculty[rand_faculty].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
+                            child.faculty[rand_faculty].schedule.append(child.timeslots[rand + 1].class_day + '-' + str(child.timeslots[rand + 1].begin_time))
+                            child.faculty[rand_faculty].units += child.offerings[i].units
+
+                            child.timeslots[rand].offering_id = child.offerings[i].offering_id
+                            child.timeslots[rand + 1].offering_id = child.offerings[i].offering_id
+
+
+                    break
+
 
 
     return child

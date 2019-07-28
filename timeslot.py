@@ -10,3 +10,4 @@ class Timeslot:
         self.room_code = room_code
         self.room_capacity = room_capacity
         self.offering_id = ""
+
