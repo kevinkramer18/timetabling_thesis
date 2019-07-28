@@ -190,3 +190,14 @@ else:
 emptyChild = Timetable(copy.deepcopy(faculty_list), copy.deepcopy(offering_list) , copy.deepcopy(timeslot_list))
 
 newChild = crossover_process(copy.deepcopy(superParent), copy.deepcopy(inferiorParent), copy.deepcopy(emptyChild))
+print("it is finished")
+
+
+newChild.fitness1 = fitness_function_1(newChild.faculty)
+newChild.fitness2 = fitness_function_2(newChild.faculty)
+newChild.fitness3 = fitness_function_3(newChild.faculty)
+
+output_faculty_csv(newChild)
+output_timetable_csv(newChild)
+output_timeslots_csv(newChild)
+

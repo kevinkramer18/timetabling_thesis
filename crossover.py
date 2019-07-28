@@ -3,8 +3,9 @@ import random
 
 def crossover_process(topParent, bottomParent, child):
 
-
     for i in range(0, len(child.offerings)-1):
+
+
         randParent = random.randint(1, 100)
 
 
@@ -80,6 +81,7 @@ def crossover_process(topParent, bottomParent, child):
 
 
         if randParent <= 60  and (child.faculty[tpProfessorIndex].units + topParent.offerings[i].units) <= child.faculty[tpProfessorIndex].load :
+            print("Top Parent Chosen")
             if tpt1begin_time not in child.faculty[tpProfessorIndex].schedule and tpt2begin_time not in child.faculty[tpProfessorIndex].schedule and ctimeslot1 == ""  and ctimeslot2 == "":
                 child.offerings[i].professor_id = topParent.offerings[i].professor_id
                 child.offerings[i].room_id = topParent.offerings[i].room_id
@@ -158,6 +160,7 @@ def crossover_process(topParent, bottomParent, child):
 
 
         elif randParent >= 60 and (child.faculty[btmProfessorIndex].units + bottomParent.offerings[i].units) <= child.faculty[btmProfessorIndex].load:
+            print("Bottom Parent Chosen")
             if btmt1begin_time not in child.faculty[btmProfessorIndex].schedule and btmt2begin_time not in child.faculty[btmProfessorIndex].schedule and cbtmtimeslot1 == "" and cbtmtimeslot2 == "":
                 child.offerings[i].professor_id = bottomParent.offerings[i].professor_id
                 child.offerings[i].room_id = bottomParent.offerings[i].room_id
@@ -231,6 +234,8 @@ def crossover_process(topParent, bottomParent, child):
                         break
 
         else:
+            print("*************************")
+            print("Mutation")
             while True:
                 rand_faculty = random.randint(0, len(child.faculty)-1)
                 if (child.faculty[rand_faculty].units + bottomParent.offerings[i].units) <= child.faculty[rand_faculty].load :
@@ -287,6 +292,7 @@ def crossover_process(topParent, bottomParent, child):
 
 
                     break
+
 
 
 
