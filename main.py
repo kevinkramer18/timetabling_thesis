@@ -41,9 +41,33 @@ timeslot_list = copy.deepcopy(list(load_timeslot_list()))
 general_course_list = copy.deepcopy(list(load_general_course_list()))
 section_list = copy.deepcopy(list(load_section_list()))
 
+
 present_faculty_courses = []
 pfc_count = 0
 population = []
+
+
+# Removes offerings that are in excess of the faculty' total load limit and transfers them to a new list
+unassigned_offering_list = []
+total_offering_units  = 0.0
+
+
+total_faculty_load = 0.0
+
+for item in faculty_list:
+    total_faculty_load += item.load
+
+for i in range(0, len(offering_list)-1):
+    if (total_offering_units + offering_list[i].units) <= total_faculty_load:
+        total_offering_units += offering_list[i].units
+    elif (total_offering_units + offering_list[i].units) > total_faculty_load:
+        unassigned_offering_list.append(offering_list[i].course_code)
+        total_offering_units -= offering_list[i].units
+        print("Too many offerings")
+        del offering_list[i]
+
+print("Total number of units:" + str(total_offering_units))
+
 
 # Removing preferred courses that aren't present in the current set of offerings
 for item in offering_list:
@@ -116,10 +140,8 @@ print(len(population))
 for x in population:
     x.fitness1 = fitness_function_1(x.faculty)
     x.fitness2 = fitness_function_2(x.faculty)
-    x.fitness3 = fitness_function_3(x.faculty)
     print("Fitness Score 1: ", x.fitness1)
     print("Fitness Score 2: ", x.fitness2)
-    print("Fitness Score 3: ", x.fitness3)
     print("-------------")
 
 
@@ -134,31 +156,24 @@ for x in population:
         temp_fit = x.fitness1
         timetable1 = x
 temp_fit = 50
+
 for x in population:
     if x.fitness2 < temp_fit:
         temp_fit = x.fitness2
         timetable2 = x
 temp_fit = 50
-for x in population:
-    if x.fitness3 < temp_fit:
-        temp_fit = x.fitness3
-        timetable3 = x
+
 
 print("***Best of the Best - Fitness 1***")
 print("Fitness Score 1: ", timetable1.fitness1)
 print("Fitness Score 2: ", timetable1.fitness2)
-print("Fitness Score 3: ", timetable1.fitness3)
+
 
 
 print("***Best of the Best - Fitness 2***")
 print("Fitness Score 1: ", timetable2.fitness1)
 print("Fitness Score 2: ", timetable2.fitness2)
-print("Fitness Score 3: ", timetable2.fitness3)
 
-print("***Best of the Best - Fitness 3***")
-print("Fitness Score 1: ", timetable3.fitness1)
-print("Fitness Score 2: ", timetable3.fitness2)
-print("Fitness Score 3: ", timetable3.fitness3)
 
 output_faculty_csv(timetable1)
 output_timetable_csv(timetable1)
@@ -195,7 +210,6 @@ print("it is finished")
 
 newChild.fitness1 = fitness_function_1(newChild.faculty)
 newChild.fitness2 = fitness_function_2(newChild.faculty)
-newChild.fitness3 = fitness_function_3(newChild.faculty)
 
 output_faculty_csv(newChild)
 output_timetable_csv(newChild)
