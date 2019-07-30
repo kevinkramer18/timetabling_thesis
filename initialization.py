@@ -24,6 +24,7 @@ def initialize(faculty_list, offering_list, timeslot_list):
                 ifaculty_list[rand].load -= item.units
                 ifaculty_list[rand].units += item.units
                 ifaculty_list[rand].assigned_offerings.append(item.offering_id)
+                ifaculty_list[rand].assigned_courses.append(item.course_id)
                 boolean = True
             elif ifaculty_list[rand].load < item.units:
                 boolean = False

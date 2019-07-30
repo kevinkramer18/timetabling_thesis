@@ -14,7 +14,7 @@ def fitness_function_1 (faculty_list):
     for item in faculty_list:
         if len(item.preferred_courses) != 0:
             for x in item.preferred_courses:
-                if x not in item.assigned_offerings:
+                if x not in item.assigned_courses:
                     aViolations += 1
 
     # Max long breaks between classes
@@ -93,7 +93,7 @@ def fitness_function_2(faculty_list):
     for item in faculty_list:
         if len(item.preferred_courses) != 0:
             for x in item.preferred_courses:
-                if x not in item.assigned_offerings:
+                if x not in item.assigned_courses:
                     pfc_a_count += 1
 
 

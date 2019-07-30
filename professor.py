@@ -9,5 +9,6 @@ class Professor:
         self.load = load
         self.preferred_courses = []
         self.assigned_offerings = []
+        self.assigned_courses = []
         self.schedule = []
         self.units = 0

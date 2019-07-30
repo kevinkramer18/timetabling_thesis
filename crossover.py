@@ -90,6 +90,8 @@ def crossover_process(topParent, bottomParent, child):
                 child.offerings[i].college_id = topParent.offerings[i].college_id
 
                 child.faculty[tpProfessorIndex].assigned_offerings.append(topParent.offerings[i].offering_id)
+                child.faculty[tpProfessorIndex].assigned_courses.append(topParent.offerings[i].course_id)
+
                 child.faculty[tpProfessorIndex].schedule.append(tpt1begin_time)
                 child.faculty[tpProfessorIndex].schedule.append(tpt2begin_time)
                 child.faculty[tpProfessorIndex].units += topParent.offerings[i].units
@@ -112,6 +114,8 @@ def crossover_process(topParent, bottomParent, child):
                         child.offerings[i].college_id = topParent.offerings[i].college_id
 
                         child.faculty[tpProfessorIndex].assigned_offerings.append(topParent.offerings[i].offering_id)
+                        child.faculty[tpProfessorIndex].assigned_courses.append(topParent.offerings[i].course_id)
+
                         child.faculty[tpProfessorIndex].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                         child.faculty[tpProfessorIndex].schedule.append(child.timeslots[rand+1].class_day + '-' + str(child.timeslots[rand+1].begin_time))
                         child.faculty[tpProfessorIndex].units += topParent.offerings[i].units
@@ -133,6 +137,7 @@ def crossover_process(topParent, bottomParent, child):
                         child.offerings[i].college_id = topParent.offerings[i].college_id
 
                         child.faculty[tpProfessorIndex].assigned_offerings.append(topParent.offerings[i].offering_id)
+                        child.faculty[tpProfessorIndex].assigned_courses.append(topParent.offerings[i].course_id)
                         child.faculty[tpProfessorIndex].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                         child.faculty[tpProfessorIndex].schedule.append(child.timeslots[rand -1].class_day + '-' + str(child.timeslots[rand - 1].begin_time))
                         child.faculty[tpProfessorIndex].units += topParent.offerings[i].units
@@ -151,6 +156,8 @@ def crossover_process(topParent, bottomParent, child):
                         child.offerings[i].college_id = topParent.offerings[i].college_id
 
                         child.faculty[tpProfessorIndex].assigned_offerings.append(topParent.offerings[i].offering_id)
+                        child.faculty[tpProfessorIndex].assigned_courses.append(topParent.offerings[i].course_id)
+
                         child.faculty[tpProfessorIndex].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                         child.faculty[tpProfessorIndex].schedule.append( child.timeslots[rand + 1].class_day + '-' + str(child.timeslots[rand + 1].begin_time))
                         child.faculty[tpProfessorIndex].units += topParent.offerings[i].units
@@ -173,10 +180,13 @@ def crossover_process(topParent, bottomParent, child):
                 child.offerings[i].college_id = bottomParent.offerings[i].college_id
 
                 child.faculty[btmProfessorIndex].assigned_offerings.append(bottomParent.offerings[i].offering_id)
+                child.faculty[btmProfessorIndex].assigned_courses.append(bottomParent.offerings[i].course_id)
+
                 child.faculty[btmProfessorIndex].schedule.append(btmt1begin_time)
                 child.faculty[btmProfessorIndex].schedule.append(btmt2begin_time)
                 child.faculty[btmProfessorIndex].units += bottomParent.offerings[i].units
                 child.faculty[btmProfessorIndex].load -= bottomParent.offerings[i].units
+
 
                 child.timeslots[cbtmtimeslot1index].offering_id = bottomParent.offerings[i].offering_id
                 child.timeslots[cbtmtimeslot2index].offering_id = bottomParent.offerings[i].offering_id
@@ -192,6 +202,8 @@ def crossover_process(topParent, bottomParent, child):
                         child.offerings[i].college_id =  bottomParent.offerings[i].college_id
 
                         child.faculty[btmProfessorIndex].assigned_offerings.append(bottomParent.offerings[i].offering_id)
+                        child.faculty[btmProfessorIndex].assigned_courses.append(bottomParent.offerings[i].course_id)
+
                         child.faculty[btmProfessorIndex].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                         child.faculty[btmProfessorIndex].schedule.append(child.timeslots[rand+1].class_day + '-' + str(child.timeslots[rand+1].begin_time))
                         child.faculty[btmProfessorIndex].units +=  bottomParent.offerings[i].units
@@ -213,6 +225,8 @@ def crossover_process(topParent, bottomParent, child):
                         child.offerings[i].college_id =  bottomParent.offerings[i].college_id
 
                         child.faculty[btmProfessorIndex].assigned_offerings.append( bottomParent.offerings[i].offering_id)
+                        child.faculty[btmProfessorIndex].assigned_courses.append(bottomParent.offerings[i].course_id)
+
                         child.faculty[btmProfessorIndex].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                         child.faculty[btmProfessorIndex].schedule.append(child.timeslots[rand -1].class_day + '-' + str(child.timeslots[rand - 1].begin_time))
                         child.faculty[btmProfessorIndex].units +=  bottomParent.offerings[i].units
@@ -231,6 +245,8 @@ def crossover_process(topParent, bottomParent, child):
                         child.offerings[i].college_id =  bottomParent.offerings[i].college_id
 
                         child.faculty[btmProfessorIndex].assigned_offerings.append( bottomParent.offerings[i].offering_id)
+                        child.faculty[btmProfessorIndex].assigned_courses.append(bottomParent.offerings[i].course_id)
+
                         child.faculty[btmProfessorIndex].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                         child.faculty[btmProfessorIndex].schedule.append( child.timeslots[rand + 1].class_day + '-' + str(child.timeslots[rand + 1].begin_time))
                         child.faculty[btmProfessorIndex].units +=  bottomParent.offerings[i].units
@@ -259,6 +275,8 @@ def crossover_process(topParent, bottomParent, child):
 
 
                             child.faculty[rand_faculty].assigned_offerings.append(child.offerings[i].offering_id)
+                            child.faculty[rand_faculty].assigned_courses.append(child.offerings[i].course_id)
+
                             child.faculty[rand_faculty].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                             child.faculty[rand_faculty].schedule.append(child.timeslots[rand + 1].class_day + '-' + str(child.timeslots[rand + 1].begin_time))
                             child.faculty[rand_faculty].units += child.offerings[i].units
@@ -276,6 +294,8 @@ def crossover_process(topParent, bottomParent, child):
 
 
                             child.faculty[rand_faculty].assigned_offerings.append(child.offerings[i].offering_id)
+                            child.faculty[rand_faculty].assigned_courses.append(child.offerings[i].course_id)
+
                             child.faculty[rand_faculty].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                             child.faculty[rand_faculty].schedule.append(child.timeslots[rand - 1].class_day + '-' + str(child.timeslots[rand - 1].begin_time))
                             child.faculty[rand_faculty].units += child.offerings[i].units
@@ -294,6 +314,8 @@ def crossover_process(topParent, bottomParent, child):
 
 
                             child.faculty[rand_faculty].assigned_offerings.append(child.offerings[i].offering_id)
+                            child.faculty[rand_faculty].assigned_courses.append(child.offerings[i].course_id)
+
                             child.faculty[rand_faculty].schedule.append(child.timeslots[rand].class_day + '-' + str(child.timeslots[rand].begin_time))
                             child.faculty[rand_faculty].schedule.append(child.timeslots[rand + 1].class_day + '-' + str(child.timeslots[rand + 1].begin_time))
                             child.faculty[rand_faculty].units += child.offerings[i].units
