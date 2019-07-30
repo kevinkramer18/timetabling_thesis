@@ -211,14 +211,18 @@ for x in range(10):
     newChild.fitness1 = fitness_function_1(newChild.faculty)
     newChild.fitness2 = fitness_function_2(newChild.faculty)
 
-    population.sort(key=lambda x: x.fitness2, reverse=True)
+    population.sort(key=lambda x: x.fitness2)
 
-    if newChild.fitness2 >= population[len(population)-1].fitness2:
+    if newChild.fitness2 <= population[len(population)-1].fitness2:
         del population[len(population)-1]
         population.append(newChild)
 
+#Output best timetable to csv
+population.sort(key=lambda x: x.fitness2)
+print(population[9].fitness2)
+print(population[0].fitness2)
 
-output_faculty_csv(newChild)
-output_timetable_csv(newChild)
-output_timeslots_csv(newChild)
+output_faculty_csv(population[0])
+output_timetable_csv(population[0])
+output_timeslots_csv(population[0])
 
