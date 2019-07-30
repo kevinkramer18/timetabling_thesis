@@ -181,35 +181,42 @@ output_timeslots_csv(timetable1)
 
 #-----------------------------------------------------------------------------------------------------------------------
 
-# Selection
+# Selection and Population
+for x in range(10):
+    numParentA = tournament_selection(population)
+    print(numParentA)
 
-numParentA = tournament_selection(population)
-print(numParentA)
+    numParentB = numParentA
 
-numParentB = numParentA
+    while numParentB == numParentA:
+        numParentB = tournament_selection(population)
 
-while numParentB == numParentA:
-    numParentB = tournament_selection(population)
+    print(numParentB)
 
-print(numParentB)
-
-if population[numParentA].fitness2 <= population[numParentB].fitness2:
-    superParent = copy.deepcopy(population[numParentA])
-    inferiorParent = copy.deepcopy((population[numParentB]))
-else:
-    superParent = copy.deepcopy(population[numParentB])
-    inferiorParent = copy.deepcopy((population[numParentA]))
-# Crossover
-
-
-emptyChild = Timetable(copy.deepcopy(faculty_list), copy.deepcopy(offering_list) , copy.deepcopy(timeslot_list))
-
-newChild = crossover_process(copy.deepcopy(superParent), copy.deepcopy(inferiorParent), copy.deepcopy(emptyChild))
-print("it is finished")
+    if population[numParentA].fitness2 <= population[numParentB].fitness2:
+        superParent = copy.deepcopy(population[numParentA])
+        inferiorParent = copy.deepcopy((population[numParentB]))
+    else:
+        superParent = copy.deepcopy(population[numParentB])
+        inferiorParent = copy.deepcopy((population[numParentA]))
+    # Crossover
 
 
-newChild.fitness1 = fitness_function_1(newChild.faculty)
-newChild.fitness2 = fitness_function_2(newChild.faculty)
+    emptyChild = Timetable(copy.deepcopy(faculty_list), copy.deepcopy(offering_list) , copy.deepcopy(timeslot_list))
+
+    newChild = crossover_process(copy.deepcopy(superParent), copy.deepcopy(inferiorParent), copy.deepcopy(emptyChild))
+    print("it is finished")
+
+
+    newChild.fitness1 = fitness_function_1(newChild.faculty)
+    newChild.fitness2 = fitness_function_2(newChild.faculty)
+
+    population.sort(key=lambda x: x.fitness2, reverse=True)
+
+    if newChild.fitness2 >= population[len(population)-1].fitness2:
+        del population[len(population)-1]
+        population.append(newChild)
+
 
 output_faculty_csv(newChild)
 output_timetable_csv(newChild)
