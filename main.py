@@ -16,7 +16,7 @@ from loading import load_general_course_list
 from loading import load_section_list
 
 from evaluation import fitness_function_1
-from evaluation import fitness_function_3
+
 from evaluation import fitness_function_2
 
 from output import output_faculty_csv
@@ -242,7 +242,7 @@ avg_total = avg_total/pop_size
 print("************************************************************************************************************************************")
 print("                                                             Important Data                                                         ")
 print("************************************************************************************************************************************")
-print("Run Time in {0} seconds: ".format(time.time() - startTime) )
+print("Run Time: {0} seconds ".format(time.time() - startTime) )
 print("No. of Generations: " + str(generations))
 print("Population Size: " + str(pop_size))
 print("Average Fitness for Latest Generation: " + str(avg_total))
