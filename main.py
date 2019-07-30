@@ -33,6 +33,9 @@ from selection import  tournament_selection
 # Import Functions from Crossover
 from crossover import crossover_process
 
+# Import Time
+import time
+
 # List declarations
 course_list = copy.deepcopy(list(load_course_list()))
 faculty_list = copy.deepcopy(list(load_faculty_list()))
@@ -46,6 +49,7 @@ present_faculty_courses = []
 pfc_count = 0
 population = []
 
+startTime = time.time()
 
 # Removes offerings that are in excess of the faculty' total load limit and transfers them to a new list
 unassigned_offering_list = []
@@ -238,7 +242,7 @@ avg_total = avg_total/pop_size
 print("*******************************************************************************************************************")
 print("                                            Important Data                                                         ")
 print("*******************************************************************************************************************")
-print("Run Time: " + str())
+print("Run Time in {0} seconds: ".format(time.time() - startTime) )
 print("No. of Generations: " + str(generations))
 print("Population Size: " + str(pop_size))
 print("Average Fitness for Latest Generation: " + str(avg_total))
