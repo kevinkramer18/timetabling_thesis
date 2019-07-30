@@ -131,7 +131,7 @@ print("\n")
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
 
-for x in range(10):
+for x in range(100):
     population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list)))
 
 print(len(population))
@@ -182,7 +182,7 @@ output_timeslots_csv(timetable1)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Selection and Population
-for x in range(10):
+for x in range(100):
     numParentA = tournament_selection(population)
     print(numParentA)
 
@@ -219,7 +219,7 @@ for x in range(10):
 
 #Output best timetable to csv
 population.sort(key=lambda x: x.fitness2)
-print(population[9].fitness2)
+print(population[len(population)-1].fitness2)
 print(population[0].fitness2)
 
 output_faculty_csv(population[0])
