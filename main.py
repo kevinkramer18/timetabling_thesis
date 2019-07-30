@@ -228,17 +228,25 @@ population.sort(key=lambda x: x.fitness2)
 print(population[len(population)-1].fitness2)
 print(population[0].fitness2)
 
+#Average fitness for last generation
+avg_total = 0.0
+for item in population:
+    avg_total += item.fitness2
+avg_total = avg_total/pop_size
 
 
 print("*******************************************************************************************************************")
-print("Important Data")
+print("                                            Important Data                                                         ")
 print("*******************************************************************************************************************")
 print("Run Time: " + str())
 print("No. of Generations: " + str(generations))
 print("Population Size: " + str(pop_size))
+print("Average Fitness for Latest Generation: " + str(avg_total))
 print("Fittest Member: " + str(population[0].fitness2))
+print("Least Fit Member: " + str(population[pop_size - 1].fitness2))
 print("Total No. of Faculty Units: " + str(total_faculty_load))
 print("Total No. of Offering Units: " + str(total_offering_units))
+print("Total No. of Remaining Units: " + str(total_remaining_units))
 print("Unassigned Offerings List: ")
 print(unassigned_offering_list)
 
