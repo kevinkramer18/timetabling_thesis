@@ -50,23 +50,24 @@ population = []
 # Removes offerings that are in excess of the faculty' total load limit and transfers them to a new list
 unassigned_offering_list = []
 total_offering_units  = 0.0
-
+total_remaining_units = 0.0
 
 total_faculty_load = 0.0
 
 for item in faculty_list:
     total_faculty_load += item.load
 
-for i in range(0, len(offering_list)-1):
-    if (total_offering_units + offering_list[i].units) <= total_faculty_load:
-        total_offering_units += offering_list[i].units
-    elif (total_offering_units + offering_list[i].units) > total_faculty_load:
-        unassigned_offering_list.append(offering_list[i].course_code)
-        total_offering_units -= offering_list[i].units
-        print("Too many offerings")
-        del offering_list[i]
+for item in offering_list:
+    total_offering_units += item.units
+
+total_remaining_units = total_offering_units
+
+while total_remaining_units > total_faculty_load:
+    total_remaining_units -= offering_list[len(offering_list)-1].units
+    del offering_list[len(offering_list)-1]
 
 print("Total number of units:" + str(total_offering_units))
+print("Total number of remaining units:" + str(total_remaining_units))
 
 
 # Removing preferred courses that aren't present in the current set of offerings
@@ -131,7 +132,9 @@ print("\n")
 
 # Assigns Faculty to Offerings and Offerings to Timeslots
 
-for x in range(100):
+#Change pop_size for population number
+pop_size = 100
+for x in range(pop_size):
     population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list)))
 
 print(len(population))
@@ -182,7 +185,10 @@ output_timeslots_csv(timetable1)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Selection and Population
-for x in range(100):
+
+#change generations for how many times it loops
+generations = 100
+for x in range(generations):
     numParentA = tournament_selection(population)
     print(numParentA)
 
@@ -221,6 +227,20 @@ for x in range(100):
 population.sort(key=lambda x: x.fitness2)
 print(population[len(population)-1].fitness2)
 print(population[0].fitness2)
+
+
+
+print("*******************************************************************************************************************")
+print("Important Data")
+print("*******************************************************************************************************************")
+print("Run Time: " + str())
+print("No. of Generations: " + str(generations))
+print("Population Size: " + str(pop_size))
+print("Fittest Member: " + str(population[0].fitness2))
+print("Total No. of Faculty Units: " + str(total_faculty_load))
+print("Total No. of Offering Units: " + str(total_offering_units))
+print("Unassigned Offerings List: ")
+print(unassigned_offering_list)
 
 output_faculty_csv(population[0])
 output_timetable_csv(population[0])
