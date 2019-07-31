@@ -103,6 +103,18 @@ def fitness_function_1 (faculty_list):
             if mCount >= 1 and tCount >= 1 and fCount >= 1:
                 aViolations +=2
 
+    # Max Preparations
+    for x in faculty_list:
+        if len(x.assigned_courses) >= 4:
+            mViolations += 1
+
+    for x in faculty_list:
+        if len(x.assigned_courses) >= 4:
+            list_set = set(x.assigned_courses)
+            # convert the set to the list
+            unique_list = (list(list_set))
+            if len(unique_list) >= 4:
+                aViolations += 1
 
     print(aViolations, mViolations)
 
@@ -116,14 +128,16 @@ def fitness_function_2(faculty_list):
     aViolations = 0
 
     # Change these Percentages for the Fitness Function 2 Tests
-    pfc_percentage = 0.4
-    tfc_percentage =  0.4
+    pfc_percentage = 0.35
+    tfc_percentage =  0.35
     under_percentage = 0.1
     spread_percentage = 0.1
+    prep_percentage = 0.1
 
     pfc_a_count = 0
     spread_count = 0
     under_count = 0
+    prep_count = 0
 
     mw_time_list = []
     th_time_list = []
@@ -199,8 +213,18 @@ def fitness_function_2(faculty_list):
             if mCount >= 1 and tCount >= 1 and fCount >= 1:
                 spread_count += 2
 
-    print(aViolations,'*', tfc_percentage, '   ', pfc_a_count, '*', pfc_percentage, '  ', under_count, '*', under_percentage, "  ",spread_count, '*', spread_percentage)
-    score = (aViolations * tfc_percentage)+(pfc_a_count * pfc_percentage)+ (under_count * under_percentage)+ (spread_count *spread_percentage)
+
+    # Max Preparations
+    for x in faculty_list:
+        if len(x.assigned_courses) >= 4:
+            list_set = set(x.assigned_courses)
+            # convert the set to the list
+            unique_list = (list(list_set))
+            if len(unique_list) >= 4:
+                prep_count += 1
+
+    print(aViolations,'*', tfc_percentage, '   ', pfc_a_count, '*', pfc_percentage, '  ', under_count, '*', under_percentage, "  ",spread_count, '*', spread_percentage, "  ",prep_count, '*', prep_percentage)
+    score = (aViolations * tfc_percentage)+(pfc_a_count * pfc_percentage)+ (under_count * under_percentage)+ (spread_count *spread_percentage) + (prep_count * prep_percentage)
 
     return score
 
