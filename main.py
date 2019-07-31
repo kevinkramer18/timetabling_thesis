@@ -68,6 +68,7 @@ total_remaining_units = total_offering_units
 
 while total_remaining_units > total_faculty_load:
     total_remaining_units -= offering_list[len(offering_list)-1].units
+    unassigned_offering_list.append(offering_list[len(offering_list) - 1].course_code)
     del offering_list[len(offering_list)-1]
 
 print("Total number of units:" + str(total_offering_units))
