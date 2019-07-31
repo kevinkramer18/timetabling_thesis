@@ -68,6 +68,7 @@ total_remaining_units = total_offering_units
 
 while total_remaining_units > total_faculty_load:
     total_remaining_units -= offering_list[len(offering_list)-1].units
+    unassigned_offering_list.append(offering_list[len(offering_list)-1].course_code)
     del offering_list[len(offering_list)-1]
 
 print("Total number of units:" + str(total_offering_units))
@@ -203,7 +204,7 @@ for x in range(generations):
 
     print(numParentB)
 
-    if population[numParentA].fitness2 <= population[numParentB].fitness2:
+    if population[numParentA].fitness1 <= population[numParentB].fitness1:
         superParent = copy.deepcopy(population[numParentA])
         inferiorParent = copy.deepcopy((population[numParentB]))
     else:
@@ -223,17 +224,17 @@ for x in range(generations):
 
     population.sort(key=lambda x: x.fitness2)
 
-    if newChild.fitness2 <= population[len(population)-1].fitness2:
+    if newChild.fitness1 <= population[len(population)-1].fitness1:
         del population[len(population)-1]
         population.append(newChild)
 
 #Output best timetable to csv
-population.sort(key=lambda x: x.fitness2)
+population.sort(key=lambda x: x.fitness1)
 
 #Average fitness for last generation
 avg_total = 0.0
 for item in population:
-    avg_total += item.fitness2
+    avg_total += item.fitness1
 avg_total = avg_total/pop_size
 
 print("************************************************************************************************************************************")
@@ -243,8 +244,8 @@ print("Run Time: {0} seconds ".format(time.time() - startTime) )
 print("No. of Generations: " + str(generations))
 print("Population Size: " + str(pop_size))
 print("Average Fitness for Latest Generation: " + str(avg_total))
-print("Fittest Member: " + str(population[0].fitness2))
-print("Least Fit Member: " + str(population[pop_size - 1].fitness2))
+print("Fittest Member: " + str(population[0].fitness1))
+print("Least Fit Member: " + str(population[pop_size - 1].fitness1))
 print("Total No. of Faculty Units: " + str(total_faculty_load))
 print("Total No. of Offering Units: " + str(total_offering_units))
 print("Total No. of Remaining Units: " + str(total_remaining_units))
