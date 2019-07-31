@@ -137,7 +137,7 @@ print("\n")
 # Assigns Faculty to Offerings and Offerings to Timeslots
 
 #Change pop_size for population number
-pop_size = 100
+pop_size = 10
 for x in range(pop_size):
     population.append(initialize(copy.deepcopy(faculty_list), copy.deepcopy(offering_list), copy.deepcopy(timeslot_list)))
 
@@ -191,7 +191,7 @@ output_timeslots_csv(timetable1)
 # Selection and Population
 
 #change generations for how many times it loops
-generations = 100
+generations = 10
 for x in range(generations):
     numParentA = tournament_selection(population)
     print(numParentA)

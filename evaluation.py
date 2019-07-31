@@ -8,6 +8,7 @@ def fitness_function_1 (faculty_list):
     th_time_list = []
     f_time_list = []
 
+    # Course Preference Violations
     for item in faculty_list:
         mViolations += len(item.preferred_courses)
 
@@ -17,7 +18,7 @@ def fitness_function_1 (faculty_list):
                 if x not in item.assigned_courses:
                     aViolations += 1
 
-    # Max long breaks between classes
+    # Time Preferences Violations (Max long breaks between classes)
     for item in faculty_list:
         if len(item.schedule) >= 2:
             for item2 in item.schedule:
@@ -66,6 +67,13 @@ def fitness_function_1 (faculty_list):
                    # print(f_time_list[y + 1])
                     aViolations += 1
 
+    # Underload Violations
+    for x in faculty_list:
+        if (x.units + x.load) == 12.0:
+            mViolations +=1
+    for x in faculty_list:
+        if (x.units + x.load) == 12.0 and x.units != 12.0:
+            aViolations +=1
 
     print(aViolations, mViolations)
 
@@ -78,18 +86,20 @@ def fitness_function_2(faculty_list):
     mViolations = 0
     aViolations = 0
 
-    pfc_percentage = 0.6
-    lb_percentage =  0.4
+    pfc_percentage = 0.4
+    tfc_percentage =  0.4
+    under_percentage = 0.2
 
     pfc_a_count = 0
     lb_a_count = 0
-
+    under_count = 0
     score = 0
 
     mw_time_list = []
     th_time_list = []
     f_time_list = []
 
+    # Course Preference Violations
     for item in faculty_list:
         if len(item.preferred_courses) != 0:
             for x in item.preferred_courses:
@@ -97,7 +107,7 @@ def fitness_function_2(faculty_list):
                     pfc_a_count += 1
 
 
-    # Breaks in between classes
+    # Time Preference Violations (Max long breaks in between classes)
 
     for item in faculty_list:
         if len(item.schedule) >= 2:
@@ -134,8 +144,13 @@ def fitness_function_2(faculty_list):
                    # print(f_time_list[y + 1])
                     aViolations += 1
 
-    print(aViolations,'*', lb_percentage, '   ', pfc_a_count, '*', pfc_percentage)
-    score = (aViolations * lb_percentage)+(pfc_a_count * pfc_percentage)
+    # Underload Violations
+    for x in faculty_list:
+        if (x.units + x.load) == 12.0 and x.units != 12.0:
+            under_count += 1
+
+    print(aViolations,'*', tfc_percentage, '   ', pfc_a_count, '*', pfc_percentage, '  ', under_count, '*', under_percentage)
+    score = (aViolations * tfc_percentage)+(pfc_a_count * pfc_percentage)+ (under_count * under_percentage)
 
     return score
 

@@ -6,11 +6,13 @@ from timetable import Timetable
 
 def initialize(faculty_list, offering_list, timeslot_list):
 
+
 # Transfer to local variables
     ifaculty_list = copy.deepcopy(faculty_list)
     ioffering_list = copy.deepcopy(offering_list)
     itimeslot_list = copy.deepcopy(timeslot_list)
     #isection_list = copy.deepcopy(section_list)
+
 # Assign offerings to faculty
 
     for item in ioffering_list:
@@ -19,7 +21,7 @@ def initialize(faculty_list, offering_list, timeslot_list):
         while not boolean:
             print("assigning offerings to faculty")
             rand = random.randint(0, len(ifaculty_list)-1)
-            if ifaculty_list[rand].load >= item.units:
+            if ifaculty_list[rand].load >= item.units :
                 item.professor_id = ifaculty_list[rand].professor_id
                 ifaculty_list[rand].load -= item.units
                 ifaculty_list[rand].units += item.units
