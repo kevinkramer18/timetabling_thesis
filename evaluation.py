@@ -75,6 +75,35 @@ def fitness_function_1 (faculty_list):
         if (x.units + x.load) == 12.0 and x.units != 12.0:
             aViolations +=1
 
+
+    # Spread of Classes Violations
+
+    for x in faculty_list:
+        if (x.units + x.load) == 6:
+            mViolations += 1
+        elif (x.units + x.load) > 6:
+            mViolations += 2
+
+    for x in faculty_list:
+        mCount = 0
+        tCount = 0
+        fCount = 0
+        for y in x.schedule:
+            temp_list = copy.deepcopy(y.split('-'))
+            if temp_list[0] == 'M':
+                mCount += 1
+            elif temp_list[0] == 'T':
+                tCount += 1
+            elif temp_list[0] == 'F':
+                fCount += 1
+        if len(x.schedule) == 4:
+            if mCount >= 1 and tCount >=1 or mCount >=1 and fCount >=1 or tCount >=1 and fCount >=1:
+                aViolations +=1
+        elif len(x.schedule) > 4:
+            if mCount >= 1 and tCount >= 1 and fCount >= 1:
+                aViolations +=2
+
+
     print(aViolations, mViolations)
 
     score = aViolations/mViolations
@@ -83,17 +112,18 @@ def fitness_function_1 (faculty_list):
 
 
 def fitness_function_2(faculty_list):
-    mViolations = 0
+
     aViolations = 0
 
+    # Change these Percentages for the Fitness Function 2 Tests
     pfc_percentage = 0.4
     tfc_percentage =  0.4
-    under_percentage = 0.2
+    under_percentage = 0.1
+    spread_percentage = 0.1
 
     pfc_a_count = 0
-    lb_a_count = 0
+    spread_count = 0
     under_count = 0
-    score = 0
 
     mw_time_list = []
     th_time_list = []
@@ -149,8 +179,28 @@ def fitness_function_2(faculty_list):
         if (x.units + x.load) == 12.0 and x.units != 12.0:
             under_count += 1
 
-    print(aViolations,'*', tfc_percentage, '   ', pfc_a_count, '*', pfc_percentage, '  ', under_count, '*', under_percentage)
-    score = (aViolations * tfc_percentage)+(pfc_a_count * pfc_percentage)+ (under_count * under_percentage)
+    # Spread of Classes Violations
+    for x in faculty_list:
+        mCount = 0
+        tCount = 0
+        fCount = 0
+        for y in x.schedule:
+            temp_list = copy.deepcopy(y.split('-'))
+            if temp_list[0] == 'M':
+                mCount += 1
+            elif temp_list[0] == 'T':
+                tCount += 1
+            elif temp_list[0] == 'F':
+                fCount += 1
+        if len(x.schedule) == 4:
+            if mCount >= 1 and tCount >= 1 or mCount >= 1 and fCount >= 1 or tCount >= 1 and fCount >= 1:
+                spread_count += 1
+        elif len(x.schedule) > 4:
+            if mCount >= 1 and tCount >= 1 and fCount >= 1:
+                spread_count += 2
+
+    print(aViolations,'*', tfc_percentage, '   ', pfc_a_count, '*', pfc_percentage, '  ', under_count, '*', under_percentage, "  ",spread_count, '*', spread_percentage)
+    score = (aViolations * tfc_percentage)+(pfc_a_count * pfc_percentage)+ (under_count * under_percentage)+ (spread_count *spread_percentage)
 
     return score
 
