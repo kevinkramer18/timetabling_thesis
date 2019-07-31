@@ -116,7 +116,7 @@ def fitness_function_1 (faculty_list):
             if len(unique_list) >= 4:
                 aViolations += 1
 
-    print(aViolations, mViolations)
+    print("Actual Violation: ", aViolations, "Maximum Violations: ", mViolations)
 
     score = aViolations/mViolations
     return score

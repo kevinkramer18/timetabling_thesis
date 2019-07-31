@@ -229,15 +229,12 @@ for x in range(generations):
 
 #Output best timetable to csv
 population.sort(key=lambda x: x.fitness2)
-print(population[len(population)-1].fitness2)
-print(population[0].fitness2)
 
 #Average fitness for last generation
 avg_total = 0.0
 for item in population:
     avg_total += item.fitness2
 avg_total = avg_total/pop_size
-
 
 print("************************************************************************************************************************************")
 print("                                                             Important Data                                                         ")
