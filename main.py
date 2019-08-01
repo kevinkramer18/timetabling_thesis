@@ -191,9 +191,20 @@ output_timeslots_csv(timetable1)
 
 # Selection and Population
 
-#change generations for how many times it loops
+#change generations and percentage of gen for how many times it loops and adds to the average fitness list
 generations = 10
+avg_fit_list = []
+percentage_of_gen = 1
+
+#appends to list of average fitness list the first gen avg fitness
+avg_total = 0.0
+for item in population:
+    avg_total += item.fitness2
+avg_total = avg_total/pop_size
+avg_fit_list.append(avg_total)
+
 for x in range(generations):
+
     numParentA = tournament_selection(population)
     print(numParentA)
 
@@ -228,6 +239,13 @@ for x in range(generations):
         del population[len(population)-1]
         population.append(newChild)
 
+    if x % percentage_of_gen == 0:
+        avg_total = 0.0
+        for item in population:
+            avg_total += item.fitness2
+        avg_total = avg_total / pop_size
+        avg_fit_list.append(avg_total)
+
 #Output best timetable to csv
 population.sort(key=lambda x: x.fitness2)
 
@@ -251,6 +269,8 @@ print("Total No. of Offering Units: " + str(total_offering_units))
 print("Total No. of Remaining Units: " + str(total_remaining_units))
 print("Unassigned Offerings List: ")
 print(unassigned_offering_list)
+print("Average Fitness List per 10th Generation: ")
+print(avg_fit_list)
 
 output_faculty_csv(population[0])
 output_timetable_csv(population[0])
