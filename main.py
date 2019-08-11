@@ -193,6 +193,7 @@ output_timeslots_csv(timetable1)
 
 #change generations and percentage of gen for how many times it loops and adds to the average fitness list
 generations = 10
+pop_fit = []
 avg_fit_list = []
 percentage_of_gen = 1
 
@@ -200,6 +201,7 @@ percentage_of_gen = 1
 avg_total = 0.0
 for item in population:
     avg_total += item.fitness1
+
 avg_total = avg_total/pop_size
 avg_fit_list.append(avg_total)
 
@@ -240,10 +242,13 @@ for x in range(generations):
 
     if x % percentage_of_gen == 0:
         avg_total = 0.0
+
         for item in population:
             avg_total += item.fitness1
+            pop_fit.append(item.fitness1*100)
         avg_total = avg_total / pop_size
         avg_fit_list.append(avg_total)
+        pop_fit.append("DELIMITER")
 
 #Output best timetable to csv
 population.sort(key=lambda x: x.fitness1)
@@ -252,6 +257,7 @@ population.sort(key=lambda x: x.fitness1)
 avg_total = 0.0
 for item in population:
     avg_total += item.fitness1
+    pop_fit.append(item.fitness1*100)
 avg_total = avg_total/pop_size
 
 print("************************************************************************************************************************************")
@@ -270,6 +276,8 @@ print("Unassigned Offerings List: ")
 print(unassigned_offering_list)
 print("Average Fitness List per 10th generation: ")
 print(avg_fit_list)
+print("Pop fit every 10th generation:")
+print(pop_fit)
 
 output_faculty_csv(population[0])
 output_timetable_csv(population[0])
