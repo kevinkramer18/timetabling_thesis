@@ -192,10 +192,10 @@ output_timeslots_csv(timetable1)
 # Selection and Population
 
 #change generations and percentage of gen for how many times it loops and adds to the average fitness list
-generations = 10
+generations = 10000
 pop_fit = []
 avg_fit_list = []
-percentage_of_gen = 1
+percentage_of_gen = 1000
 
 #appends to list of average fitness list the first gen avg fitness
 avg_total = 0.0
